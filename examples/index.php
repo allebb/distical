@@ -13,11 +13,9 @@
  * @link https://github.com/bobsta63/distical
  * 
  */
-
 /**
  * ---- EXAMPLE LIBRARY USAGE ----
  */
-
 require_once '../distical.class.php';
 
 #$points = array(

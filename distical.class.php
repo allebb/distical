@@ -14,8 +14,11 @@
  * 
  */
 class Distical {
+    /**
+     * Stores the earth's mean radius, used by the calculate() method.
+     */
 
-    private $mean_earth_radius = 6372.797;
+    const mean_earth_radius = 6372.797;
 
     /**
      * Stores the format to report distance on.
@@ -25,31 +28,30 @@ class Distical {
 
     /**
      * The human readable measure of distance.
-     * @var type 
+     * @var string Human readable format, eg. 'Miles' or 'Kilometres'.
      */
     private $human_format;
 
     /**
-     * Storage for point 'A'
-     * @var array() First value for the 'lat' and second value for the 'long'.
+     * Object variable storage for point 'A'
+     * @var object Key pair values (lat and lon).
      */
     private $a;
 
     /**
-     * Storage for point 'B'
-     * @var array() First value for the 'lat' and second value for the 'long'.
+     * Object variable storage for point 'B'
+     * @var object Key pair values (lat and lon).
      */
     private $b;
 
     /**
-     * Stores the result of the distance converion.
-     * @var type 
+     * Object variable storage for the result of the distance converion.
+     * @var decimal The total distance between points 'A' and 'B' after running 'calculate()'.
      */
-    private $total = 0;
+    private $total = 0.0;
 
     /**
-     * Lets initiate the class object, if no default 'points' have been defined
-     * then we'll set both points 'a' and 'b' to 0.
+     * The constructor (enough said!)
      * @param array $points_array Optional inital points array.
      */
     public function __construct($points_array = null) {
@@ -63,6 +65,10 @@ class Distical {
         }
     }
 
+    /**
+     * Setter to register lat/long points for 'A' and 'B'.
+     * @param array $points_array A multi-dimensional array of 'A' and 'B' point lat/long values.
+     */
     public function between($points_array) {
         $points_object = json_decode(json_encode($points_array));
         $this->a = $points_object->a;
@@ -71,20 +77,18 @@ class Distical {
 
     /**
      * Change the format for results to 'Miles'
-     * @return type
      */
     public function as_miles() {
         $this->human_format = 'miles';
-        return $this->format = 'm';
+        $this->format = 'm';
     }
 
     /**
      * Change the format for results to 'Kilometres'
-     * @return type
      */
     public function as_km() {
         $this->human_format = 'kilometres';
-        return $this->format = 'k';
+        $this->format = 'k';
     }
 
     /**
@@ -96,11 +100,11 @@ class Distical {
     }
 
     /**
-     * Does the actual calculation between the two LAT/LNG points.
+     * Does the actual calculation between the two lat/long points.
      */
     public function calculate() {
         $pi80 = M_PI / 180;
-        
+
         $this->a->lat *= $pi80;
         $this->a->lon *= $pi80;
         $this->b->lat *= $pi80;
@@ -110,7 +114,7 @@ class Distical {
         $dlng = $this->b->lon - $this->a->lon;
         $a = sin($dlat / 2) * sin($dlat / 2) + cos($this->a->lat) * cos($this->b->lat) * sin($dlng / 2) * sin($dlng / 2);
         $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-        $this->total = $this->mean_earth_radius * $c;
+        $this->total = self::mean_earth_radius * $c;
     }
 
     /**
@@ -127,7 +131,7 @@ class Distical {
 
     /**
      * Returns the total distance between the two lat/lng points.
-     * @return type
+     * @return decimal The total distance between both points.
      */
     public function display() {
         switch ($this->format) {
