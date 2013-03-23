@@ -16,9 +16,9 @@
 /**
  * ---- EXAMPLE LIBRARY USAGE ----
  */
-require_once '../src/Distical/Calculator.php';
+require_once '../src/Distical/Distance/Calculator.php';
 
-use Ballen\Distical\Calculator;
+use Distical\Distance\Calculator;
 
 $points = array(
     'a' => array('lat' => 51.73441738801072, 'lon' => 0.4632282257080078), // Central Ipswich!

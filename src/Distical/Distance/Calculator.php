@@ -14,7 +14,7 @@
  *
  */
 
-namespace Ballen\Distical;
+namespace Distical\Distance;
 
 class Calculator
 {
@@ -160,7 +160,7 @@ class Calculator
                 $out_total = $this->total;
                 break;
         }
-        
+
         return $out_total;
     }
 
