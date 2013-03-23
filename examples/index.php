@@ -36,8 +36,6 @@ $point_to_point->calculate(); // Calcluate the distance and store it ready to 'd
 
 echo 'Total distance between Ipswich, Suffolk and Aylesbury in Buckinghamshire is: ' . $point_to_point->display() . ' ' . $point_to_point->unitOfMeasure() . '.<br /><br />';
 
-
-
 echo '<h2>Method chaining example:</h2>';
 $points_ipswich_colchester = array(
     'a' => array('lat' => 52.055868, 'lon' => 1.161804), // Central Ipswich!
@@ -47,7 +45,6 @@ $points_ipswich_colchester = array(
 $point_to_point2 = new Calculator;
 // Since v1.1.0, You can also do method chaining too like so...
 echo 'Distance from Ipswich to Colchester is: ' .$point_to_point2->between($points_ipswich_colchester)->asMiles()->calculate()->display().' ' .$point_to_point2->unitOfMeasure(). '<br /><br />';
-
 
 echo '<h2>Simple logic and rounding on distance calculations:</h2>';
 /**

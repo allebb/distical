@@ -16,7 +16,8 @@
 
 namespace Ballen\Distical;
 
-class Calculator {
+class Calculator
+{
     /**
      * Stores the earth's mean radius, used by the calculate() method.
      */
@@ -57,7 +58,8 @@ class Calculator {
      * The constructor
      * @param array $points_array Optional inital points array.
      */
-    public function __construct($points_array = null) {
+    public function __construct($points_array = null)
+    {
         if ($points_array != null) {
             $this->between($points_array);
         } else {
@@ -72,28 +74,34 @@ class Calculator {
      * Setter to register lat/long points for 'A' and 'B'.
      * @param array $points_array A multi-dimensional array of 'A' and 'B' point lat/long values.
      */
-    public function between($points_array) {
+    public function between($points_array)
+    {
         $points_object = json_decode(json_encode($points_array));
         $this->a = $points_object->a;
         $this->b = $points_object->b;
+
         return $this;
     }
 
     /**
      * Change the format for results to 'Miles'
      */
-    public function asMiles() {
+    public function asMiles()
+    {
         $this->human_format = 'miles';
         $this->format = 'm';
+
         return $this;
     }
 
     /**
      * Change the format for results to 'Kilometres'
      */
-    public function asKilometres() {
+    public function asKilometres()
+    {
         $this->human_format = 'kilometres';
         $this->format = 'k';
+
         return $this;
     }
 
@@ -101,14 +109,16 @@ class Calculator {
      * Display the huamn readable format.
      * @return string The human readable format as a string.
      */
-    public function unitOfMeasure() {
+    public function unitOfMeasure()
+    {
         return $this->human_format;
     }
 
     /**
      * Does the actual calculation between the two lat/long points.
      */
-    public function calculate() {
+    public function calculate()
+    {
         $pi80 = M_PI / 180;
         $this->a->lat *= $pi80;
         $this->a->lon *= $pi80;
@@ -119,6 +129,7 @@ class Calculator {
         $a = sin($dlat / 2) * sin($dlat / 2) + cos($this->a->lat) * cos($this->b->lat) * sin($dlng / 2) * sin($dlng / 2);
         $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
         $this->total = self::MEAN_EARTH_RADIUS * $c;
+
         return $this;
     }
 
@@ -128,7 +139,8 @@ class Calculator {
      * @param  int     $distance The distance to check against.
      * @return boolean
      */
-    public function checkGreaterThan($distance) {
+    public function checkGreaterThan($distance)
+    {
         if ($this->total > $distance)
             return true;
         return false;
@@ -138,7 +150,8 @@ class Calculator {
      * Returns the total distance between the two lat/lng points.
      * @return decimal The total distance between both points.
      */
-    public function display() {
+    public function display()
+    {
         switch ($this->format) {
             case 'm':
                 $out_total = $this->total * 0.621371192;
@@ -147,6 +160,7 @@ class Calculator {
                 $out_total = $this->total;
                 break;
         }
+        
         return $out_total;
     }
 
