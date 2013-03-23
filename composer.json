@@ -1,5 +1,5 @@
 {
-    "name": "distical/distical",
+    "name": "Distical/Distance",
     "type": "library",
     "description": "A simple distance (Lat/Long) calculation library for PHP 5.3+",
     "keywords": ["lat", "lng", "long", "calculator", "gps"],
