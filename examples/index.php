@@ -16,7 +16,7 @@
 /**
  * ---- EXAMPLE LIBRARY USAGE ----
  */
-require_once '../Calculator.php';
+require_once '../src/Distical/Distance/Calculator.php';
 
 use Distical\Distance\Calculator;
 
