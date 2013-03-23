@@ -14,7 +14,7 @@
  *
  */
 
-namespace Distical\Distance;
+namespace Distical;
 
 class Calculator
 {
