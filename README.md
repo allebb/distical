@@ -7,9 +7,9 @@ co-ordinates.
 # Usage example
 
 Its rather simple, I'm sure that I don't need to bore you with all the class
-methods (there aren't many at the moment anyway) but I've demonstrated each
-method and commented on their usage etc. in the example file provided at the
-following location:
+methods (there's not many at the moment anyway) but I've demonstrated each
+method, method chaining and commented on their usage etc. in the example file
+provided at the following location:
 
 ``examples/index.php``
 
