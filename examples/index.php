@@ -11,6 +11,7 @@
  * @version 1.1.0
  * @license http://www.gnu.org/licenses/gpl.html
  * @link https://github.com/bobsta63/distical
+ * @link http://www.bobbyallen.me
  *
  */
 /**
@@ -18,7 +19,7 @@
  */
 require_once '../src/Distical/Calculator.php';
 
-use Distical\Calculator;
+use Ballen\Distical\Calculator;
 
 $points = array(
     'a' => array('lat' => 51.73441738801072, 'lon' => 0.4632282257080078), // Central Ipswich!

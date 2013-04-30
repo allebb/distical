@@ -11,10 +11,11 @@
  * @version 1.1.0
  * @license http://www.gnu.org/licenses/gpl.html
  * @link https://github.com/bobsta63/distical
+ * @link http://www.bobbyallen.me
  *
  */
 
-namespace Distical;
+namespace Ballen\Distical;
 
 class Calculator
 {
