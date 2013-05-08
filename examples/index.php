@@ -9,7 +9,7 @@
  *
  * @author bobbyallen.uk@gmail.com (Bobby Allen)
  * @version 1.1.0
- * @license http://www.gnu.org/licenses/gpl.html
+ * @license http://opensource.org/licenses/MIT
  * @link https://github.com/bobsta63/distical
  * @link http://www.bobbyallen.me
  *

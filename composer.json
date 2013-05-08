@@ -4,7 +4,7 @@
     "description": "A simple distance (Lat/Long) calculation library for PHP 5.3+",
     "type": "library",
     "keywords": ["lat", "lng", "long", "calculator", "gps"],
-    "license": "GPL-3.0",
+    "license": "MIT",
     "homepage": "http://github.com/bobsta63/distical",
     "authors": [
         {
