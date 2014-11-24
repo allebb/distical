@@ -13,12 +13,24 @@ class LatLong
 
     public function __construct($lat, $lng)
     {
-        
+        $this->lat = $lat;
+        $this->lng = $lng;
+        if(!$this->validateLat()){
+            throw new Exception('The latitude parameter is invalid, should be between -90 and 90');
+        }
+        if(!$this->validateLng()){
+            throw new Exception('The longitude parameter is invalid, should be between -180 and 180');
+        }
     }
 
     private function validateLat()
     {
-        
+        return preg_match(this::LAT_VALIDATION_REGEX, $this->lat);
+    }
+
+    private function validateLng()
+    {
+        return preg_match(this::LNG_VALIDATION_REGEX, $this->lng);
     }
 
     public function getLatitude()
@@ -26,7 +38,7 @@ class LatLong
         return $this->lat;
     }
 
-    public function getLongditude()
+    public function getLongitude()
     {
         return $this->long;
     }
@@ -38,7 +50,7 @@ class LatLong
 
     public function getLng()
     {
-        return $this->getLongditude();
+        return $this->getLongitude();
     }
 
 }
