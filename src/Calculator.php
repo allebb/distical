@@ -115,7 +115,7 @@ class Calculator
                 $dlng = $lng_b - $lng_a;
                 $a = sin($dlat / 2) * sin($dlat / 2) + cos($lat_a) * cos($lat_b) * sin($dlng / 2) * sin($dlng / 2);
                 $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-                $total += self::MEAN_EARTH_RADIUS * $c;
+                $total = $total + (self::MEAN_EARTH_RADIUS * $c);
             }
             $previous = $point;
         }
