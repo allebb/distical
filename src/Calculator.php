@@ -23,16 +23,20 @@ class Calculator
     const MEAN_EARTH_RADIUS = 6372.797;
 
     /**
-     * Stores the format to report distance on.
-     * @var string Format prefix (valid options are 'm' for miles or 'k' for kilometres)
+     * Miles fomation configuration string.
      */
-    private $format;
+    const FORMAT_MILES = "miles";
 
     /**
-     * The human readable measure of distance.
-     * @var string Human readable format, eg. 'Miles' or 'Kilometres'.
+     * Kilometres fomation configuration string.
      */
-    private $human_format;
+    const FORMAT_KILOMETRES = "kilometres";
+
+    /**
+     * Stores the unit format for returning results with.
+     * @var string
+     */
+    private $format;
 
     /**
      * Object variable storage for point 'A'
@@ -70,36 +74,37 @@ class Calculator
 
     /**
      * Setter to register lat/long points for 'A' and 'B'.
-     * @param array $points_array A multi-dimensional array of 'A' and 'B' point lat/long values.
+     * @param array $points_array Lat/Lng points to measure between as an array.
+     * @return \Ballen\Distical\Calculator
      */
     public function between($points_array)
     {
         $points_object = json_decode(json_encode($points_array));
         $this->a = $points_object->a;
         $this->b = $points_object->b;
-
         return $this;
     }
 
     /**
      * Change the format for results to 'Miles'
+     * @return \Ballen\Distical\Calculator
+      {
+      $this->format = self::FORMAT_MILES;
+      return $this;
      */
     public function asMiles()
     {
-        $this->human_format = 'miles';
-        $this->format = 'm';
-
+        $this->format = self::FORMAT_MILES;
         return $this;
     }
 
     /**
      * Change the format for results to 'Kilometres'
+     * @return \Ballen\Distical\Calculator
      */
     public function asKilometres()
     {
-        $this->human_format = 'kilometres';
-        $this->format = 'k';
-
+        $this->format = self::FORMAT_KILOMETRES;
         return $this;
     }
 
@@ -109,11 +114,12 @@ class Calculator
      */
     public function unitOfMeasure()
     {
-        return $this->human_format;
+        return $this->format;
     }
 
     /**
-     * Does the actual calculation between the two lat/long points.
+     * Calculates the disatance between points A and B.
+     * @return \Ballen\Distical\Calculator
      */
     public function calculate()
     {
@@ -134,7 +140,7 @@ class Calculator
     /**
      * A helper method to check if the calculated distance is greater than a
      * specfied distance.
-     * @param  int     $distance The distance to check against.
+     * @param int $distance The distance of which to check is greater than.
      * @return boolean
      */
     public function checkGreaterThan($distance)
@@ -147,19 +153,18 @@ class Calculator
 
     /**
      * Returns the total distance between the two lat/lng points.
-     * @return decimal The total distance between both points.
+     * @return float
      */
     public function display()
     {
         switch ($this->format) {
-            case 'm':
+            case self::FORMAT_MILES:
                 $out_total = $this->total * 0.621371192;
                 break;
-            case 'k':
+            case self::FORMAT_KILOMETRES:
                 $out_total = $this->total;
                 break;
         }
-
-        return $out_total;
+        return (float) $out_total;
     }
 }
