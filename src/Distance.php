@@ -17,6 +17,9 @@
 class Distance
 {
 
+    const KILOMETERS_IN_MILES = 0.621371192;
+    const KILOMETERS_INL_NAUTICAL_MILES = 0.539956803;
+
     /**
      * The distance in kilometres
      */
@@ -61,7 +64,16 @@ class Distance
      */
     public function asMiles()
     {
-        return $this->kilometres * 0.621371192;
+        return $this->kilometres * self::KILOMETERS_TO_MILES;
+    }
+
+    /**
+     * Distance as nautical miles
+     * @return int
+     */
+    public function asNauticalMiles()
+    {
+        return $this->kilometres * self::KILOMETERS_INL_NAUTICAL_MILES;
     }
 
     /**
