@@ -23,38 +23,10 @@ class Calculator
     const MEAN_EARTH_RADIUS = 6372.797;
 
     /**
-     * Miles fomation configuration string.
+     * LatLon points to measure between.
+     * @var array
      */
-    const FORMAT_MILES = "miles";
-
-    /**
-     * Kilometres fomation configuration string.
-     */
-    const FORMAT_KILOMETRES = "kilometres";
-
-    /**
-     * Stores the unit format for returning results with.
-     * @var string
-     */
-    private $format;
-
-    /**
-     * Object variable storage for point 'A'
-     * @var object Key pair values (lat and lon).
-     */
-    private $a;
-
-    /**
-     * Object variable storage for point 'B'
-     * @var object Key pair values (lat and lon).
-     */
-    private $b;
-
-    /**
-     * Object variable storage for the result of the distance converion.
-     * @var decimal The total distance between points 'A' and 'B' after running 'calculate()'.
-     */
-    private $total = 0.0;
+    private $points;
 
     /**
      * The constructor
@@ -73,6 +45,34 @@ class Calculator
     }
 
     /**
+     * Adds a new lat/long co-ordinate to measure.
+     * @param \Ballen\Distical\LatLong $point
+     * @param string $key Optional co-ordinate key (name).
+     */
+    public function addPoint(LatLong $point, $key = null)
+    {
+        if (!is_null($key)) {
+            $this->points[$key] = $point;
+        } else {
+            $this->points[] = $point;
+        }
+    }
+
+    /**
+     * Remove a lat/long co-ordinate from the points collection.
+     * @param int|string $key The name or ID of the point key.
+     * @throws \InvalidArgumentException
+     */
+    public function removePoint($key = null)
+    {
+        if (isset($this->points[$key])) {
+            unset($this->points[$key]);
+        } else {
+            throw new \InvalidArgumentException('The point key does not exist.');
+        }
+    }
+
+    /**
      * Setter to register lat/long points for 'A' and 'B'.
      * @param array $points_array Lat/Lng points to measure between as an array.
      * @return \Ballen\Distical\Calculator
@@ -86,40 +86,8 @@ class Calculator
     }
 
     /**
-     * Change the format for results to 'Miles'
-     * @return \Ballen\Distical\Calculator
-      {
-      $this->format = self::FORMAT_MILES;
-      return $this;
-     */
-    public function asMiles()
-    {
-        $this->format = self::FORMAT_MILES;
-        return $this;
-    }
-
-    /**
-     * Change the format for results to 'Kilometres'
-     * @return \Ballen\Distical\Calculator
-     */
-    public function asKilometres()
-    {
-        $this->format = self::FORMAT_KILOMETRES;
-        return $this;
-    }
-
-    /**
-     * Display the huamn readable format.
-     * @return string The human readable format as a string.
-     */
-    public function unitOfMeasure()
-    {
-        return $this->format;
-    }
-
-    /**
-     * Calculates the disatance between points A and B.
-     * @return \Ballen\Distical\Calculator
+     * Calculates the disatance between each of the points.
+     * @return integer Distance in kilometres.
      */
     private function calculate()
     {
@@ -132,54 +100,15 @@ class Calculator
         $dlng = $this->b->lon - $this->a->lon;
         $a = sin($dlat / 2) * sin($dlat / 2) + cos($this->a->lat) * cos($this->b->lat) * sin($dlng / 2) * sin($dlng / 2);
         $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-        $this->total = self::MEAN_EARTH_RADIUS * $c;
-
-        return $this;
+        return self::MEAN_EARTH_RADIUS * $c;
     }
 
     /**
      * Returns the total distance between the two lat/lng points.
-     * @return float
+     * @return \Ballen\Distical\Distance
      */
     public function get()
     {
-        $this->calculate();
-        switch ($this->format) {
-            case self::FORMAT_MILES:
-                $out_total = $this->total * 0.621371192;
-                break;
-            case self::FORMAT_KILOMETRES:
-                $out_total = $this->total;
-                break;
-        }
-        return (float) $out_total;
-    }
-
-    /**
-     * A helper method to check if the calculated distance is futher (greater) than a
-     * specfied distance.
-     * @param int $distance The distance of which to check against.
-     * @return boolean
-     */
-    public function isFurtherThan($distance)
-    {
-        if ($this->total > $distance) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * A helper method to check if the calculated distance is shorter (less) than a
-     * specfied distance.
-     * @param int $distance The distance of which to check against.
-     * @return boolean
-     */
-    public function isShorterThan($distance)
-    {
-        if ($this->total < $distance) {
-            return true;
-        }
-        return false;
+        return new Distance($this->calculate());
     }
 }

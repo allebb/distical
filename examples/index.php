@@ -14,6 +14,7 @@
  *
  */
 require_once '../src/Calculator.php';
+require_once '../src/Distance.php';
 use Ballen\Distical\Calculator;
 
 $points = array(
@@ -26,10 +27,7 @@ echo '<h1>Distical examples</h1>';
 echo '<h2>Object instansiation with constructor co-ordinates:</h2>';
 $point_to_point = new Calculator($points); // Create a new instance of the class.
 #$point_to_point->between($points); // Register the points (A to B etc!) as an alternative to passing it in with the class initiation string.
-
-$point_to_point->asMiles(); // Calculate as 'miles' as opposed to 'km'.
-
-echo 'Total distance between Ipswich, Suffolk and Aylesbury in Buckinghamshire is: ' . $point_to_point->get() . ' ' . $point_to_point->unitOfMeasure() . '.<br /><br />';
+echo '<p>Total distance between Ipswich, Suffolk and Aylesbury in Buckinghamshire is ' . $point_to_point->get() . ' kilometres.</p>';
 
 echo '<h2>Method chaining example:</h2>';
 $points_ipswich_colchester = array(
@@ -38,17 +36,4 @@ $points_ipswich_colchester = array(
 );
 
 $point_to_point2 = new Calculator;
-// Since v1.1.0, You can also do method chaining too like so...
-echo 'Distance from Ipswich to Colchester is: ' . $point_to_point2->between($points_ipswich_colchester)->asMiles()->calculate()->display() . ' ' . $point_to_point2->unitOfMeasure() . '<br /><br />';
-
-echo '<h2>Simple logic and rounding on distance calculations:</h2>';
-/**
- * Lets checks if the total distance are greater than a defined distance.
- */
-$check_distance = 10;
-
-if ($point_to_point2->checkGreaterThan($check_distance)) {
-    echo ceil($point_to_point2->display()) . ' ' . $point_to_point2->unitOfMeasure() . ' is greater than ' . $check_distance . " " . $point_to_point2->unitOfMeasure();
-} else {
-    echo ceil($point_to_point2->display()) . ' ' . $point_to_point2->unitOfMeasure() . ' is less than ' . $check_distance . " " . $point_to_point2->unitOfMeasure();
-}
+echo 'Distance from Ipswich to Colchester is: ' . $point_to_point2->between($points_ipswich_colchester)->get()->asMiles() . ' miles (or ' . $point_to_point2->between($points_ipswich_colchester)->get()->asKilometres() . 'km).<br /><br />';
