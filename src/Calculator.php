@@ -37,7 +37,7 @@ class Calculator
      */
     public function __construct($a = null, $b = null)
     {
-        if (( $a instanceof LatLong) and ( $b instanceof LatLong)) {
+        if (($a instanceof LatLong) && ($b instanceof LatLong)) {
             $this->between($a, $b);
         }
     }
