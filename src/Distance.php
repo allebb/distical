@@ -64,7 +64,7 @@ class Distance
      */
     public function asMiles()
     {
-        return $this->kilometres * self::KILOMETERS_TO_MILES;
+        return $this->kilometres * self::KILOMETERS_IN_MILES;
     }
 
     /**
