@@ -121,7 +121,7 @@ class Calculator
      * Calculates the disatance between points A and B.
      * @return \Ballen\Distical\Calculator
      */
-    public function calculate()
+    private function calculate()
     {
         $pi80 = M_PI / 180;
         $this->a->lat *= $pi80;
@@ -138,25 +138,12 @@ class Calculator
     }
 
     /**
-     * A helper method to check if the calculated distance is greater than a
-     * specfied distance.
-     * @param int $distance The distance of which to check is greater than.
-     * @return boolean
-     */
-    public function checkGreaterThan($distance)
-    {
-        if ($this->total > $distance) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Returns the total distance between the two lat/lng points.
      * @return float
      */
-    public function display()
+    public function get()
     {
+        $this->calculate();
         switch ($this->format) {
             case self::FORMAT_MILES:
                 $out_total = $this->total * 0.621371192;
@@ -166,5 +153,33 @@ class Calculator
                 break;
         }
         return (float) $out_total;
+    }
+
+    /**
+     * A helper method to check if the calculated distance is futher (greater) than a
+     * specfied distance.
+     * @param int $distance The distance of which to check against.
+     * @return boolean
+     */
+    public function isFurtherThan($distance)
+    {
+        if ($this->total > $distance) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * A helper method to check if the calculated distance is shorter (less) than a
+     * specfied distance.
+     * @param int $distance The distance of which to check against.
+     * @return boolean
+     */
+    public function isShorterThan($distance)
+    {
+        if ($this->total < $distance) {
+            return true;
+        }
+        return false;
     }
 }

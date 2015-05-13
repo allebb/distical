@@ -28,9 +28,8 @@ $point_to_point = new Calculator($points); // Create a new instance of the class
 #$point_to_point->between($points); // Register the points (A to B etc!) as an alternative to passing it in with the class initiation string.
 
 $point_to_point->asMiles(); // Calculate as 'miles' as opposed to 'km'.
-$point_to_point->calculate(); // Calcluate the distance and store it ready to 'display()'!
 
-echo 'Total distance between Ipswich, Suffolk and Aylesbury in Buckinghamshire is: ' . $point_to_point->display() . ' ' . $point_to_point->unitOfMeasure() . '.<br /><br />';
+echo 'Total distance between Ipswich, Suffolk and Aylesbury in Buckinghamshire is: ' . $point_to_point->get() . ' ' . $point_to_point->unitOfMeasure() . '.<br /><br />';
 
 echo '<h2>Method chaining example:</h2>';
 $points_ipswich_colchester = array(
