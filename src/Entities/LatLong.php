@@ -17,12 +17,34 @@
 class LatLong
 {
 
+    /**
+     * Validation regex for Latitude parameters.
+     */
     const LAT_VALIDATION_REGEX = "/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/";
+
+    /**
+     * Validation regex for Longitude parameters.
+     */
     const LNG_VALIDATION_REGEX = "/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/";
 
+    /**
+     * The latitude co-ordinate.
+     * @var double
+     */
     protected $lat;
+
+    /**
+     * The longitude co-ordinate.
+     * @var double
+     */
     protected $lng;
 
+    /**
+     * Create a new latitude and longitude object.
+     * @param double $lat The latitude co-ordinate.
+     * @param double $lng The longitude co-ordinate.
+     * @throws Exception
+     */
     public function __construct($lat, $lng)
     {
         $this->lat = $lat;
@@ -37,7 +59,7 @@ class LatLong
 
     /**
      * Validates the Latitude value.
-     * @return boolean True if validation passes.
+     * @return boolean
      */
     private function validateLat()
     {
@@ -55,7 +77,7 @@ class LatLong
 
     /**
      * Returns the current Latitude co-ordinate.
-     * @return float
+     * @return double
      */
     public function getLatitude()
     {
@@ -64,7 +86,7 @@ class LatLong
 
     /**
      * Returns the current Longitude co-ordinate.
-     * @return float
+     * @return double
      */
     public function getLongitude()
     {
@@ -73,18 +95,18 @@ class LatLong
 
     /**
      * Alias of getLatitude
-     * @return float
+     * @return double
      */
-    public function getLat()
+    public function lat()
     {
         return $this->getLatitude();
     }
 
     /**
      * Alias of getLongitude
-     * @return float
+     * @return double
      */
-    public function getLng()
+    public function lng()
     {
         return $this->getLongitude();
     }

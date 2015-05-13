@@ -27,7 +27,7 @@ class Distance
 
     /**
      * Class constructor
-     * @param integer|float|decimal $kilometres The distance in kilometres.
+     * @param double $kilometres The distance in kilometres.
      */
     public function __construct($kilometres = 0)
     {
@@ -51,7 +51,7 @@ class Distance
 
     /**
      * Distance as kilometres
-     * @return int
+     * @return double
      */
     public function asKilometres()
     {
@@ -60,7 +60,7 @@ class Distance
 
     /**
      * Distance as miles
-     * @return int
+     * @return double
      */
     public function asMiles()
     {
@@ -69,7 +69,7 @@ class Distance
 
     /**
      * Distance as nautical miles
-     * @return int
+     * @return double
      */
     public function asNauticalMiles()
     {
@@ -78,7 +78,7 @@ class Distance
 
     /**
      * Default __toString() method, defaults to returning the distance as kilometres.
-     * @return int
+     * @return string
      */
     public function __toString()
     {
