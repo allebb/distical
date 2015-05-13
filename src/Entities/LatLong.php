@@ -35,31 +35,55 @@ class LatLong
         }
     }
 
+    /**
+     * Validates the Latitude value.
+     * @return boolean True if validation passes.
+     */
     private function validateLat()
     {
         return preg_match(this::LAT_VALIDATION_REGEX, $this->lat);
     }
 
+    /**
+     * Validates the Longitude value.
+     * @return boolean True if validation passes.
+     */
     private function validateLng()
     {
         return preg_match(this::LNG_VALIDATION_REGEX, $this->lng);
     }
 
+    /**
+     * Returns the current Latitude co-ordinate.
+     * @return float
+     */
     public function getLatitude()
     {
-        return $this->lat;
+        return (float) $this->lat;
     }
 
+    /**
+     * Returns the current Longitude co-ordinate.
+     * @return float
+     */
     public function getLongitude()
     {
         return $this->long;
     }
 
+    /**
+     * Alias of getLatitude
+     * @return float
+     */
     public function getLat()
     {
         return $this->getLatitude();
     }
 
+    /**
+     * Alias of getLongitude
+     * @return float
+     */
     public function getLng()
     {
         return $this->getLongitude();

@@ -1,24 +1,19 @@
 <?php
-
 /**
  * Distical
  *
  * Distical is a simple distance calculator library for PHP 5.3+ which
- * amongst other things can calculate the distance between two lat/long
+ * amongst other things can calculate the distance between two or more lat/long
  * co-ordinates.
  *
- * @author bobbyallen.uk@gmail.com (Bobby Allen)
- * @version 1.1.0
+ * @author Bobby Allen <ballen@bobbyallen.me>
+ * @version 2.0.0
  * @license http://opensource.org/licenses/MIT
  * @link https://github.com/bobsta63/distical
  * @link http://www.bobbyallen.me
  *
  */
-/**
- * ---- EXAMPLE LIBRARY USAGE ----
- */
-require_once '../src/Distical/Calculator.php';
-
+require_once '../src/Calculator.php';
 use Ballen\Distical\Calculator;
 
 $points = array(
@@ -45,7 +40,7 @@ $points_ipswich_colchester = array(
 
 $point_to_point2 = new Calculator;
 // Since v1.1.0, You can also do method chaining too like so...
-echo 'Distance from Ipswich to Colchester is: ' .$point_to_point2->between($points_ipswich_colchester)->asMiles()->calculate()->display().' ' .$point_to_point2->unitOfMeasure(). '<br /><br />';
+echo 'Distance from Ipswich to Colchester is: ' . $point_to_point2->between($points_ipswich_colchester)->asMiles()->calculate()->display() . ' ' . $point_to_point2->unitOfMeasure() . '<br /><br />';
 
 echo '<h2>Simple logic and rounding on distance calculations:</h2>';
 /**
