@@ -100,23 +100,26 @@ class Calculator
         if (count($this->points) < 2) {
             throw new \RuntimeException('There must be two or more points (co-ordinates) before a calculation can be performed.');
         }
-        
         $pi180 = M_PI / 180;
         $i = 0;
-        $c = 0;
+        $total = 0;
         $previous = null;
-
         foreach ($this->points as $point) {
-            $i++; // Increment the internal counter. 
+            $i++;
             if ($i > 1) {
-                $dlat = ($point->lat() * $pi180) - ($previous->lat() * $pi180);
-                $dlng = ($point->lng() * $pi180) - ($previous->lng() * $pi180);
-                $a = sin($dlat / 2) * sin($dlat / 2) + cos($previous->lat()) * cos($point->lat()) * sin($dlng / 2) * sin($dlng / 2);
-                $c = $c + (2 * atan2(sqrt($a), sqrt(1 - $a)));
+                $lat_a = $previous->lat() * $pi180;
+                $lng_a = $previous->lng() * $pi180;
+                $lat_b = $point->lat() * $pi180;
+                $lng_b = $point->lng() * $pi180;
+                $dlat = $lat_b - $lat_a;
+                $dlng = $lng_b - $lng_a;
+                $a = sin($dlat / 2) * sin($dlat / 2) + cos($lat_a) * cos($lat_b) * sin($dlng / 2) * sin($dlng / 2);
+                $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+                $total += self::MEAN_EARTH_RADIUS * $c;
             }
             $previous = $point;
         }
-        return self::MEAN_EARTH_RADIUS * $c;
+        return $total;
     }
 
     /**

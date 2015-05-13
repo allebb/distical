@@ -17,7 +17,14 @@
 class Distance
 {
 
+    /**
+     * Converstion from Kilomters to Miles.
+     */
     const KILOMETERS_IN_MILES = 0.621371192;
+
+    /**
+     * Converstion from Kilomters to Naugtical miles.
+     */
     const KILOMETERS_INL_NAUTICAL_MILES = 0.539956803;
 
     /**

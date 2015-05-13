@@ -81,7 +81,7 @@ class LatLong
      */
     public function getLatitude()
     {
-        return (float) $this->latitude;
+        return $this->latitude;
     }
 
     /**
