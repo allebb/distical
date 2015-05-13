@@ -1,5 +1,7 @@
 <?php namespace Ballen\Distical;
 
+use Ballen\Distical\Entities\LatLong as LatLong;
+
 /**
  * Distical
  *
@@ -30,17 +32,13 @@ class Calculator
 
     /**
      * The constructor
-     * @param array $points_array Optional inital points array.
+     * @param \Ballen\Distical\LatLong $a Optional initial point.
+     * @param \Ballen\Distical\LatLong $b Optional final point.
      */
-    public function __construct($points_array = null)
+    public function __construct($a = null, $b = null)
     {
-        if ($points_array != null) {
-            $this->between($points_array);
-        } else {
-            $this->between(array(
-                'a' => array('lat' => 0, 'lon' => 0),
-                'b' => array('lat' => 0, 'lon' => 0),
-            ));
+        if (( $a instanceof LatLong) and ( $b instanceof LatLong)) {
+            $this->between($a, $b);
         }
     }
 
@@ -48,6 +46,7 @@ class Calculator
      * Adds a new lat/long co-ordinate to measure.
      * @param \Ballen\Distical\LatLong $point
      * @param string $key Optional co-ordinate key (name).
+     * @return \Ballen\Distical\Calculator
      */
     public function addPoint(LatLong $point, $key = null)
     {
@@ -56,12 +55,14 @@ class Calculator
         } else {
             $this->points[] = $point;
         }
+        return $this;
     }
 
     /**
      * Remove a lat/long co-ordinate from the points collection.
      * @param int|string $key The name or ID of the point key.
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @return \Ballen\Distical\Calculator
      */
     public function removePoint($key = null)
     {
@@ -70,18 +71,23 @@ class Calculator
         } else {
             throw new \InvalidArgumentException('The point key does not exist.');
         }
+        return $this;
     }
 
     /**
-     * Setter to register lat/long points for 'A' and 'B'.
-     * @param array $points_array Lat/Lng points to measure between as an array.
+     * Helper method to get distance between two points.
+     * @param LatLong $a Point A (eg. Departure point)
+     * @param LatLong $b Point B (eg. Arrival point)
      * @return \Ballen\Distical\Calculator
+     * @throws \RuntimeException
      */
-    public function between($points_array)
+    public function between(LatLong $a, LatLong $b)
     {
-        $points_object = json_decode(json_encode($points_array));
-        $this->a = $points_object->a;
-        $this->b = $points_object->b;
+        if (!empty($this->points)) {
+            throw new \RuntimeException('The between() method can only be called when it is the first set or co-ordinates.');
+        }
+        $this->addPoint($a);
+        $this->addPoint($b);
         return $this;
     }
 
@@ -91,21 +97,31 @@ class Calculator
      */
     private function calculate()
     {
-        $pi80 = M_PI / 180;
-        $this->a->lat *= $pi80;
-        $this->a->lon *= $pi80;
-        $this->b->lat *= $pi80;
-        $this->b->lon *= $pi80;
-        $dlat = $this->b->lat - $this->a->lat;
-        $dlng = $this->b->lon - $this->a->lon;
-        $a = sin($dlat / 2) * sin($dlat / 2) + cos($this->a->lat) * cos($this->b->lat) * sin($dlng / 2) * sin($dlng / 2);
-        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        if (count($this->points) < 2) {
+            throw new \RuntimeException('There must be two or more points (co-ordinates) before a calculation can be performed.');
+        }
+        
+        $pi180 = M_PI / 180;
+        $i = 0;
+        $c = 0;
+        $previous = null;
+
+        foreach ($this->points as $point) {
+            $i++; // Increment the internal counter. 
+            if ($i > 1) {
+                $dlat = ($point->lat() * $pi180) - ($previous->lat() * $pi180);
+                $dlng = ($point->lng() * $pi180) - ($previous->lng() * $pi180);
+                $a = sin($dlat / 2) * sin($dlat / 2) + cos($previous->lat()) * cos($point->lat()) * sin($dlng / 2) * sin($dlng / 2);
+                $c = $c + (2 * atan2(sqrt($a), sqrt(1 - $a)));
+            }
+            $previous = $point;
+        }
         return self::MEAN_EARTH_RADIUS * $c;
     }
 
     /**
      * Returns the total distance between the two lat/lng points.
-     * @return \Ballen\Distical\Distance
+     * @return Distance
      */
     public function get()
     {

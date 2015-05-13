@@ -31,29 +31,29 @@ class LatLong
      * The latitude co-ordinate.
      * @var double
      */
-    protected $lat;
+    protected $latitude;
 
     /**
      * The longitude co-ordinate.
      * @var double
      */
-    protected $lng;
+    protected $longitude;
 
     /**
      * Create a new latitude and longitude object.
      * @param double $lat The latitude co-ordinate.
      * @param double $lng The longitude co-ordinate.
-     * @throws Exception
+     * @throws \InvalidArgumentException
      */
     public function __construct($lat, $lng)
     {
-        $this->lat = $lat;
-        $this->lng = $lng;
+        $this->latitude = $lat;
+        $this->longitude = $lng;
         if (!$this->validateLat()) {
-            throw new Exception('The latitude parameter is invalid, should be between -90 and 90');
+            throw new \InvalidArgumentException('The latitude parameter is invalid, should be between -90 and 90');
         }
         if (!$this->validateLng()) {
-            throw new Exception('The longitude parameter is invalid, should be between -180 and 180');
+            throw new \InvalidArgumentException('The longitude parameter is invalid, should be between -180 and 180');
         }
     }
 
@@ -63,7 +63,7 @@ class LatLong
      */
     private function validateLat()
     {
-        return preg_match(this::LAT_VALIDATION_REGEX, $this->lat);
+        return preg_match(self::LAT_VALIDATION_REGEX, $this->latitude);
     }
 
     /**
@@ -72,7 +72,7 @@ class LatLong
      */
     private function validateLng()
     {
-        return preg_match(this::LNG_VALIDATION_REGEX, $this->lng);
+        return preg_match(self::LNG_VALIDATION_REGEX, $this->longitude);
     }
 
     /**
@@ -81,7 +81,7 @@ class LatLong
      */
     public function getLatitude()
     {
-        return (float) $this->lat;
+        return (float) $this->latitude;
     }
 
     /**
@@ -90,7 +90,7 @@ class LatLong
      */
     public function getLongitude()
     {
-        return $this->long;
+        return $this->longitude;
     }
 
     /**

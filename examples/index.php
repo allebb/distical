@@ -15,25 +15,22 @@
  */
 require_once '../src/Calculator.php';
 require_once '../src/Distance.php';
+require_once '../src/Entities/LatLong.php';
 use Ballen\Distical\Calculator;
+use Ballen\Distical\Entities\LatLong;
 
-$points = array(
-    'a' => array('lat' => 51.73441738801072, 'lon' => 0.4632282257080078), // Central Ipswich!
-    'b' => array('lat' => 51.81259469696908, 'lon' => -0.8111858367919922) // Central Aylesbury!
-);
+$central_ipswich = new LatLong(51.73441738801072, 0.4632282257080078); // Central Ipswich co-ordinates!
+$central_aylesbury = new LatLong(51.81259469696908, -0.8111858367919922); // Central Aylesbury co-ordinates!
 
 echo '<h1>Distical examples</h1>';
 
 echo '<h2>Object instansiation with constructor co-ordinates:</h2>';
-$point_to_point = new Calculator($points); // Create a new instance of the class.
-#$point_to_point->between($points); // Register the points (A to B etc!) as an alternative to passing it in with the class initiation string.
+$point_to_point = new Calculator($central_ipswich, $central_aylesbury); // Create a new instance of the class.
 echo '<p>Total distance between Ipswich, Suffolk and Aylesbury in Buckinghamshire is ' . $point_to_point->get() . ' kilometres.</p>';
 
-echo '<h2>Method chaining example:</h2>';
-$points_ipswich_colchester = array(
-    'a' => array('lat' => 52.055868, 'lon' => 1.161804), // Central Ipswich!
-    'b' => array('lat' => 51.888359, 'lon' => 0.892639) // Central Colchester!
-);
+echo '<h2>Getting distance conversions:</h2>';
+$central_colchester = new LatLong(51.888359, 0.892639); // Central Colchester co-ordinates!
 
 $point_to_point2 = new Calculator;
-echo 'Distance from Ipswich to Colchester is: ' . $point_to_point2->between($points_ipswich_colchester)->get()->asMiles() . ' miles (or ' . $point_to_point2->between($points_ipswich_colchester)->get()->asKilometres() . 'km).<br /><br />';
+$distance = $point_to_point2->between($central_ipswich, $central_colchester)->get();
+echo 'Distance from Ipswich to Colchester is: ' . $distance->asMiles() . ' miles (or ' . $distance->asKilometres() . 'km).<br /><br />';
