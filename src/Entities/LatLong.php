@@ -1,7 +1,19 @@
-<?php
+<?php namespace Ballen\Distical\Entities;
 
-namespace Ballen\Distical\Entities;
-
+/**
+ * Distical
+ *
+ * Distical is a simple distance calculator library for PHP 5.3+ which
+ * amongst other things can calculate the distance between two or more lat/long
+ * co-ordinates.
+ *
+ * @author Bobby Allen <ballen@bobbyallen.me>
+ * @version 2.0.0
+ * @license http://opensource.org/licenses/MIT
+ * @link https://github.com/bobsta63/distical
+ * @link http://www.bobbyallen.me
+ *
+ */
 class LatLong
 {
 
@@ -15,10 +27,10 @@ class LatLong
     {
         $this->lat = $lat;
         $this->lng = $lng;
-        if(!$this->validateLat()){
+        if (!$this->validateLat()) {
             throw new Exception('The latitude parameter is invalid, should be between -90 and 90');
         }
-        if(!$this->validateLng()){
+        if (!$this->validateLng()) {
             throw new Exception('The longitude parameter is invalid, should be between -180 and 180');
         }
     }
@@ -52,5 +64,4 @@ class LatLong
     {
         return $this->getLongitude();
     }
-
 }
