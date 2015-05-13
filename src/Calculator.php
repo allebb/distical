@@ -139,8 +139,9 @@ class Calculator
      */
     public function checkGreaterThan($distance)
     {
-        if ($this->total > $distance)
+        if ($this->total > $distance) {
             return true;
+        }
         return false;
     }
 
