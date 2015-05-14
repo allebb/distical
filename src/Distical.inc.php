@@ -22,6 +22,8 @@ $includes = array(
     'Calculator.php',
     'Entities/LatLong.php',
     'Entities/Distance.php',
+    'Exceptions/InvalidLatitudeFormatException.php',
+    'Exceptions/InvalidLongitudeFormatException.php',
 );
 
 foreach ($includes as $file) {

@@ -50,7 +50,7 @@ class Distance
     private function validateDistance($distance)
     {
         if (!is_numeric($distance)) {
-            throw new \InvalidArgumentException('The distance must be a number.');
+            throw new \InvalidArgumentException('The distance value must be of a valid type.');
         } elseif (!$distance > 0) {
             throw new \InvalidArgumentException('The distance must be greater than zero!');
         }

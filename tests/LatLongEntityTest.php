@@ -53,14 +53,16 @@ class LatLongEntityTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->test_lng, $this->entity->lng());
     }
 
-    public function testInvalidLatCoord()
+    public function testInvalidLatCoordValidation()
     {
-        // Check for exception being thrown and with correct message.
+        $this->setExpectedException('Ballen\Distical\Exceptions\InvalidLatitudeFormatException', 'The latitude parameter is invalid, value must be between -90 and 90');
+        $test = new LatLong(-91, 51);
     }
 
-    public function testInvalidLonCoord()
+    public function testInvalidLonCoordValidation()
     {
-        // Check for exception being thrown and with correct message.
+        $this->setExpectedException('Ballen\Distical\Exceptions\InvalidLongitudeFormatException', 'The longitude parameter is invalid, value must be between -180 and 180');
+        $test = new LatLong(45, 181);
     }
 
     public function testInvalidCoords()

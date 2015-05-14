@@ -50,10 +50,10 @@ class LatLong
         $this->latitude = $lat;
         $this->longitude = $lng;
         if (!$this->validateLat()) {
-            throw new \InvalidArgumentException('The latitude parameter is invalid, should be between -90 and 90');
+            throw new \Ballen\Distical\Exceptions\InvalidLatitudeFormatException('The latitude parameter is invalid, value must be between -90 and 90');
         }
         if (!$this->validateLng()) {
-            throw new \InvalidArgumentException('The longitude parameter is invalid, should be between -180 and 180');
+            throw new \Ballen\Distical\Exceptions\InvalidLongitudeFormatException('The longitude parameter is invalid, value must be between -180 and 180');
         }
     }
 

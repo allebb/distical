@@ -31,6 +31,18 @@ class DistanceEntityTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Ballen\Distical\Entities\Distance', $this->entity);
     }
 
+    public function testInvalidEntityCreationWithAsString()
+    {
+        $this->setExpectedException('InvalidArgumentException', 'The distance value must be of a valid type.');
+        $test = new Distance('a random string');
+    }
+
+    public function testInvalidEntityCreationWithZero()
+    {
+        $this->setExpectedException('InvalidArgumentException', 'The distance must be greater than zero!');
+        $test = new Distance(0);
+    }
+
     public function testConversionToKilometres()
     {
         $this->assertEquals(100, $this->entity->asKilometres());
