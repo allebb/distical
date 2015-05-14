@@ -32,19 +32,20 @@ class Calculator
 
     /**
      * The constructor
-     * @param \Ballen\Distical\LatLong $a Optional initial point.
-     * @param \Ballen\Distical\LatLong $b Optional final point.
+     * @param \Ballen\Distical\LatLong $point_a Optional initial point.
+     * @param \Ballen\Distical\LatLong $point_b Optional final point.
+     * @return void
      */
-    public function __construct($a = null, $b = null)
+    public function __construct($point_a = null, $point_b = null)
     {
-        if (($a instanceof LatLong) && ($b instanceof LatLong)) {
-            $this->between($a, $b);
+        if (($point_a instanceof LatLong) && ($point_b instanceof LatLong)) {
+            $this->between($point_a, $point_b);
         }
     }
 
     /**
      * Adds a new lat/long co-ordinate to measure.
-     * @param \Ballen\Distical\LatLong $point
+     * @param \Ballen\Distical\LatLong $point The LatLong co-ordinate object.
      * @param string $key Optional co-ordinate key (name).
      * @return \Ballen\Distical\Calculator
      */
@@ -76,46 +77,54 @@ class Calculator
 
     /**
      * Helper method to get distance between two points.
-     * @param LatLong $a Point A (eg. Departure point)
-     * @param LatLong $b Point B (eg. Arrival point)
+     * @param LatLong $point_a Point A (eg. Departure point)
+     * @param LatLong $point_b Point B (eg. Arrival point)
      * @return \Ballen\Distical\Calculator
      * @throws \RuntimeException
      */
-    public function between(LatLong $a, LatLong $b)
+    public function between(LatLong $point_a, LatLong $point_b)
     {
         if (!empty($this->points)) {
             throw new \RuntimeException('The between() method can only be called when it is the first set or co-ordinates.');
         }
-        $this->addPoint($a);
-        $this->addPoint($b);
+        $this->addPoint($point_a);
+        $this->addPoint($point_b);
         return $this;
     }
 
     /**
+     * Calculates the distance between two lat/lng posistions.
+     * @param LatLong $point_a Point A (eg. Departure point)
+     * @param LatLong $point_b Point B (eg. Arrival point)
+     * @return double
+     */
+    private function distanceBetweenPoints(LatLong $point_a, LatLong $point_b)
+    {
+        $pi180 = M_PI / 180;
+        $lat_a = $point_a->lat() * $pi180;
+        $lng_a = $point_a->lng() * $pi180;
+        $lat_b = $point_b->lat() * $pi180;
+        $lng_b = $point_b->lng() * $pi180;
+        $dlat = $lat_b - $lat_a;
+        $dlng = $lng_b - $lng_a;
+        $a = sin($dlat / 2) * sin($dlat / 2) + cos($lat_a) * cos($lat_b) * sin($dlng / 2) * sin($dlng / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        return self::MEAN_EARTH_RADIUS * $c;
+    }
+
+    /**
      * Calculates the disatance between each of the points.
-     * @return integer Distance in kilometres.
+     * @return double Distance in kilometres.
      */
     private function calculate()
     {
         if (count($this->points) < 2) {
             throw new \RuntimeException('There must be two or more points (co-ordinates) before a calculation can be performed.');
         }
-        $pi180 = M_PI / 180;
-        $i = 0;
         $total = 0;
-        $previous = null;
         foreach ($this->points as $point) {
-            $i++;
-            if ($i > 1) {
-                $lat_a = $previous->lat() * $pi180;
-                $lng_a = $previous->lng() * $pi180;
-                $lat_b = $point->lat() * $pi180;
-                $lng_b = $point->lng() * $pi180;
-                $dlat = $lat_b - $lat_a;
-                $dlng = $lng_b - $lng_a;
-                $a = sin($dlat / 2) * sin($dlat / 2) + cos($lat_a) * cos($lat_b) * sin($dlng / 2) * sin($dlng / 2);
-                $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-                $total = $total + (self::MEAN_EARTH_RADIUS * $c);
+            if (isset($previous)) {
+                $total += $this->distanceBetweenPoints($previous, $point);
             }
             $previous = $point;
         }
