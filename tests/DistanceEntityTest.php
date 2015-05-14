@@ -1,0 +1,53 @@
+<?php
+/**
+ * Distical
+ *
+ * Distical is a simple distance calculator library for PHP 5.3+ which
+ * amongst other things can calculate the distance between two or more lat/long
+ * co-ordinates.
+ *
+ * @author Bobby Allen <ballen@bobbyallen.me>
+ * @version 2.0.0
+ * @license http://opensource.org/licenses/MIT
+ * @link https://github.com/bobsta63/distical
+ * @link http://www.bobbyallen.me
+ *
+ */
+use \Ballen\Distical\Entities\Distance;
+use \PHPUnit_Framework_TestCase;
+
+class DistanceEntityTest extends PHPUnit_Framework_TestCase
+{
+
+    protected $entity;
+
+    public function __construct()
+    {
+        $this->entity = new Distance(100);
+    }
+
+    public function testEntityCreation()
+    {
+        $this->assertInstanceOf('Ballen\Distical\Entities\Distance', $this->entity);
+    }
+
+    public function testConversionToKilometres()
+    {
+        $this->assertEquals(100, $this->entity->asKilometres());
+    }
+
+    public function testConversionToMiles()
+    {
+        $this->assertEquals(62.137119200000001, $this->entity->asMiles());
+    }
+
+    public function testConversionToNauticalMiles()
+    {
+        $this->assertEquals(53.995680300000004, $this->entity->asNauticalMiles());
+    }
+
+    public function testConversionToString()
+    {
+        $this->assertEquals('100', $this->entity->__toString());
+    }
+}
