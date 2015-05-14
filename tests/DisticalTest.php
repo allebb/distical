@@ -20,33 +20,54 @@ use \PHPUnit_Framework_TestCase;
 class DisticalTest extends PHPUnit_Framework_TestCase
 {
 
+    protected $latlong1;
+    protected $latlong2;
+    protected $latlong3;
+    protected $latlong4;
+
+    public function __construct()
+    {
+        $this->latlong1 = new LatLong(52.005497, 1.045748);
+        $this->latlong2 = new LatLong(52.052728, 1.160446);
+    }
+
     public function testBetweenUsingConstructorToString()
     {
-        return true;
+        $calculator = new Calculator($this->latlong1, $this->latlong2);
+        $this->assertEquals(9.4449247131313214, $calculator->get()->asKilometres());
     }
 
     public function testBetweenUsingConstructorToMiles()
     {
-        return true;
+        $calculator = new Calculator($this->latlong1, $this->latlong2);
+        $this->assertEquals(5.86880412733486675, $calculator->get()->asMiles());
     }
 
     public function testBetweenToString()
     {
-        return false;
+        $calculator = new Calculator;
+        $calculator->between($this->latlong1, $this->latlong2);
+        $this->assertEquals('9.4449247131313', $calculator->get()->__toString());
     }
 
     public function testBetweenToKilometers()
     {
-        return true;
+        $calculator = new Calculator;
+        $calculator->between($this->latlong1, $this->latlong2);
+        $this->assertEquals(9.4449247131313214, $calculator->get()->asKilometres());
     }
 
     public function testBetweenToMiles()
     {
-        return false;
+        $calculator = new Calculator;
+        $calculator->between($this->latlong1, $this->latlong2);
+        $this->assertEquals(5.86880412733486675, $calculator->get()->asMiles());
     }
 
     public function testBetweenToNauticalMiles()
     {
-        return true;
+        $calculator = new Calculator;
+        $calculator->between($this->latlong1, $this->latlong2);
+        $this->assertEquals(5.0998513526780807, $calculator->get()->asNauticalMiles());
     }
 }
