@@ -58,7 +58,8 @@ class LatLong
     }
 
     /**
-     * Validates the Latitude value.
+     * Validates the Latitude value.Tuesday12327
+     * 
      * @return boolean
      */
     private function validateLat()

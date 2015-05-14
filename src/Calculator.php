@@ -1,6 +1,7 @@
 <?php namespace Ballen\Distical;
 
-use Ballen\Distical\Entities\LatLong as LatLong;
+use Ballen\Distical\Entities\LatLong;
+use Ballen\Distical\Entities\Distance;
 
 /**
  * Distical

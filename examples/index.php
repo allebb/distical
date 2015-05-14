@@ -13,9 +13,7 @@
  * @link http://www.bobbyallen.me
  *
  */
-require_once '../src/Calculator.php';
-require_once '../src/Distance.php';
-require_once '../src/Entities/LatLong.php';
+require_once '../src/Distical.inc.php';
 use Ballen\Distical\Calculator;
 use Ballen\Distical\Entities\LatLong;
 

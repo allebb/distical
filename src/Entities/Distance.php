@@ -1,4 +1,4 @@
-<?php namespace Ballen\Distical;
+<?php namespace Ballen\Distical\Entities;
 
 /**
  * Distical
