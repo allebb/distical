@@ -32,6 +32,34 @@ class DisticalTest extends PHPUnit_Framework_TestCase
         $this->latlong3 = new LatLong(52.062515, 1.250790);
     }
 
+    public function testCalculationWithSinglePoint()
+    {
+        $this->setExpectedException('RuntimeException', 'There must be two or more points (co-ordinates) before a calculation can be performed.');
+        $calculator = new Calculator();
+        $calculator->addPoint($this->latlong1)->get();
+    }
+
+    public function testAddPointWithKey()
+    {
+        $calculator = new Calculator();
+        $calculator->addPoint($this->latlong1, 'CapelStMary');
+    }
+
+    public function testRemovePointWithKey()
+    {
+        $calculator = new Calculator();
+        $calculator->addPoint($this->latlong1, 'ToBeRemovedAfter');
+        $calculator->removePoint('ToBeRemovedAfter');
+    }
+
+    public function testRemovePointWithInvalidKey()
+    {
+        $this->setExpectedException('InvalidArgumentException', 'The point key does not exist.');
+        $calculator = new Calculator();
+        $calculator->addPoint($this->latlong1, 'ThisIsTheFirstAndOnlyNamedKey');
+        $calculator->removePoint('TheSecondNamedKey');
+    }
+
     public function testBetweenUsingConstructorToString()
     {
         $calculator = new Calculator($this->latlong1, $this->latlong2);

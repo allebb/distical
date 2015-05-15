@@ -48,7 +48,23 @@ require_once 'path/to/Distical/Distical.inc.php';
 
 ## Examples
 
-A set of working examples can be found in the ``/examples`` directory.
+```php
+
+use Ballen\Distical\Calculator as DistanceCalculator;
+use Ballen\Distical\Entities\LatLong;
+
+// Set our Lat/Long coordinates
+$ipswich = new LatLong(52.057941, 1.147172);
+$london = new LatLong(51.507608, -0.127822);
+
+// Get the distance between these two Lat/Long coordinates...
+$distance = new DistanceCalculator($ipswich, $london);
+
+// Get the distance as Miles (asMiles()), you could also use asKilometres() or asNauticalMiles() distance conversions too!
+echo 'Distance in miles between Central Ipswich and Central London is: ' . $distance->asMiles();
+```
+
+A set of working examples can be found in the ``/examples`` directory, feel free to browse or run them!
 
 ## Tests and coverage
 
