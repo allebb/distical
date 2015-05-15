@@ -77,6 +77,7 @@ If you wish to run the tests yourself you should run the following:
 ```
 # Install the Distical Library with the 'development' packages this then including PHPUnit!
 composer install --dev
+
 # Now we run the unit tests (from the root of the project) like so:
 ./vendor/bin/phpunit
 ```
