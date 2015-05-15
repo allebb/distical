@@ -1,6 +1,6 @@
 # Distical
 
-[![Build Status](https://scrutinizer-ci.com/g/bobsta63/distical/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bobsta63/distical/build-status/master)
+[![Build Status](https://travis-ci.org/bobsta63/distical.svg)](https://travis-ci.org/bobsta63/distical)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bobsta63/distical/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bobsta63/distical/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/ballen/distical/v/stable)](https://packagist.org/packages/ballen/distical)
 [![Latest Unstable Version](https://poser.pugx.org/ballen/distical/v/unstable)](https://packagist.org/packages/ballen/distical)

@@ -13,6 +13,6 @@ matrix:
 
 sudo: false
 
-install: travis_retry composer install --no-interaction --prefer-source
+install: travis_retry composer install --no-interaction --prefer-source --dev
 
 script: vendor/bin/phpunit
