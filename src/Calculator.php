@@ -35,7 +35,6 @@ class Calculator
      * The constructor
      * @param \Ballen\Distical\LatLong $point_a Optional initial point.
      * @param \Ballen\Distical\LatLong $point_b Optional final point.
-     * @return void
      */
     public function __construct($point_a = null, $point_b = null)
     {
@@ -46,7 +45,7 @@ class Calculator
 
     /**
      * Adds a new lat/long co-ordinate to measure.
-     * @param \Ballen\Distical\LatLong $point The LatLong co-ordinate object.
+     * @param LatLong $point The LatLong co-ordinate object.
      * @param string $key Optional co-ordinate key (name).
      * @return \Ballen\Distical\Calculator
      */
