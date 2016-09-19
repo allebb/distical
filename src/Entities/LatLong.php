@@ -57,13 +57,17 @@ class LatLong
         }
     }
 
-    /**
-     * Validates the Latitude value.Tuesday12327
-     * @return boolean True if validation passes.
+        /**
+     * Validates the Latitude value.
+     * 
+     * @return boolean
      */
     private function validateLat()
     {
-        return preg_match(self::LAT_VALIDATION_REGEX, $this->latitude);
+        if (($this->latitude >= -90) && ($this->latitude <= 90)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -72,7 +76,10 @@ class LatLong
      */
     private function validateLng()
     {
-        return preg_match(self::LNG_VALIDATION_REGEX, $this->longitude);
+        if (($this->longitude >= -180) && ($this->longitude <= 180)) {
+            return true;
+        }
+        return false;
     }
 
     /**
