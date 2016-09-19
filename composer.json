@@ -1,6 +1,5 @@
 {
     "name": "ballen/distical",
-    "version": "2.0.0",
     "description": "A distance (Lat/Long) calculation library for PHP",
     "type": "library",
     "keywords": ["latitude", "longditude", "lat", "lng", "long", "calculator", "gps", "mapping", "distance"],
