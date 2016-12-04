@@ -12,7 +12,6 @@
  * @link http://bobbyallen.me
  *
  */
-
 /* * *****************************************************************************
  * THIS FILE SHOULD BE USED FOR AUTOMATICALLY LOADING THIS LIBRARY WHEN YOU ARE
  *  USING IT "STANDALONE" AND NOT USING COMPOSER OR ANOTHER PACKAGE MANAGER.

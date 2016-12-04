@@ -1,11 +1,12 @@
-<?php namespace Ballen\Distical\Entities;
+<?php
+namespace Ballen\Distical\Entities;
 
 /**
  * Distical
  *
  * Distical is a simple distance calculator library for PHP 5.3+ which
  * amongst other things can calculate the distance between two or more lat/long
- * co-ordinates.
+ * coordinates.
  *
  * @author Bobby Allen <ballen@bobbyallen.me>
  * @license http://opensource.org/licenses/MIT
@@ -27,21 +28,21 @@ class LatLong
     const LNG_VALIDATION_REGEX = "/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/";
 
     /**
-     * The latitude co-ordinate.
+     * The latitude coordinate.
      * @var double
      */
     protected $latitude;
 
     /**
-     * The longitude co-ordinate.
+     * The longitude coordinate.
      * @var double
      */
     protected $longitude;
 
     /**
      * Create a new latitude and longitude object.
-     * @param double $lat The latitude co-ordinate.
-     * @param double $lng The longitude co-ordinate.
+     * @param double $lat The latitude coordinate.
+     * @param double $lng The longitude coordinate.
      * @throws \InvalidArgumentException
      */
     public function __construct($lat, $lng)
@@ -56,7 +57,7 @@ class LatLong
         }
     }
 
-        /**
+    /**
      * Validates the Latitude value.
      * 
      * @return boolean
@@ -82,7 +83,7 @@ class LatLong
     }
 
     /**
-     * Returns the current Latitude co-ordinate.
+     * Returns the current Latitude coordinate.
      * @return double
      */
     public function getLatitude()
@@ -91,7 +92,7 @@ class LatLong
     }
 
     /**
-     * Returns the current Longitude co-ordinate.
+     * Returns the current Longitude coordinate.
      * @return double
      */
     public function getLongitude()

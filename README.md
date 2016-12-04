@@ -76,13 +76,13 @@ If you wish to run the tests yourself you should run the following:
 
 ```
 # Install the Distical Library with the 'development' packages this then including PHPUnit!
-composer install --dev
+composer install
 
 # Now we run the unit tests (from the root of the project) like so:
 ./vendor/bin/phpunit
 ```
 
-Code coverage can also be ran but rquires XDebug installed...
+Code coverage can also be ran but requires XDebug installed...
 ```
 ./vendor/bin/phpunit --coverage-html ./report
 ```
