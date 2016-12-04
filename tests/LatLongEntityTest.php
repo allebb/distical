@@ -73,6 +73,6 @@ class LatLongEntityTest extends PHPUnit_Framework_TestCase
     public function testValidCoords()
     {
         $test = new LatLong($this->test_lat, $this->test_lng);
-        $this->assertInstanceOf(LatLong::class, $test);
+        $this->assertInstanceOf('\Ballen\Distical\Entities\LatLong', $test);
     }
 }
