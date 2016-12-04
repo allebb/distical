@@ -1,8 +1,8 @@
 # Distical
 
-[![Build Status](https://travis-ci.org/bobsta63/distical.svg)](https://travis-ci.org/bobsta63/distical)
-[![Code Coverage](https://scrutinizer-ci.com/g/bobsta63/distical/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bobsta63/distical/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bobsta63/distical/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bobsta63/distical/?branch=master)
+[![Build Status](https://travis-ci.org/allebb/distical.svg)](https://travis-ci.org/allebb/distical)
+[![Code Coverage](https://scrutinizer-ci.com/g/allebb/distical/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/allebb/distical/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/allebb/distical/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/allebb/distical/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/ballen/distical/v/stable)](https://packagist.org/packages/ballen/distical) [![Latest Unstable Version](https://poser.pugx.org/ballen/distical/v/unstable)](https://packagist.org/packages/ballen/distical) [![License](https://poser.pugx.org/ballen/distical/license)](https://packagist.org/packages/ballen/distical)
 
 Distical is a PHP distance calculator library of which, amongst other things is developed to calculate the distance between two or more lat/long coordinates.
@@ -39,7 +39,7 @@ composer install ballen/distical --no-dev
 
 ### Standalone
 
-You can use the library "standalone" by downloading it from the [GitHub releases section](https://github.com/bobsta63/distical/releases), extracting the files to a place on your server and then adding the "include" into your code like so:
+You can use the library "standalone" by downloading it from the [GitHub releases section](https://github.com/allebb/distical/releases), extracting the files to a place on your server and then adding the "include" into your code like so:
 
 ```php
 require_once 'path/to/Distical/Distical.inc.php';
