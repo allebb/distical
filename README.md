@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/allebb/distical.svg)](https://travis-ci.org/allebb/distical)
 [![Code Coverage](https://scrutinizer-ci.com/g/allebb/distical/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/allebb/distical/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/allebb/distical/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/allebb/distical/?branch=master)
+[![Code Climate](https://codeclimate.com/github/allebb/distical/badges/gpa.svg)](https://codeclimate.com/github/allebb/distical)
 [![Latest Stable Version](https://poser.pugx.org/ballen/distical/v/stable)](https://packagist.org/packages/ballen/distical) [![Latest Unstable Version](https://poser.pugx.org/ballen/distical/v/unstable)](https://packagist.org/packages/ballen/distical) [![License](https://poser.pugx.org/ballen/distical/license)](https://packagist.org/packages/ballen/distical)
 
 Distical is a PHP distance calculator library of which, amongst other things is developed to calculate the distance between two or more lat/long coordinates.
