@@ -1,4 +1,5 @@
-<?php namespace Ballen\Distical;
+<?php
+namespace Ballen\Distical;
 
 use Ballen\Distical\Entities\LatLong;
 use Ballen\Distical\Entities\Distance;
@@ -11,10 +12,9 @@ use Ballen\Distical\Entities\Distance;
  * co-ordinates.
  *
  * @author Bobby Allen <ballen@bobbyallen.me>
- * @version 2.0.0
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/bobsta63/distical
- * @link http://www.bobbyallen.me
+ * @link https://github.com/allebb/distical
+ * @link http://bobbyallen.me
  *
  */
 class Calculator
@@ -33,13 +33,13 @@ class Calculator
 
     /**
      * The constructor
-     * @param \Ballen\Distical\LatLong $point_a Optional initial point.
-     * @param \Ballen\Distical\LatLong $point_b Optional final point.
+     * @param \Ballen\Distical\LatLong $pointA Optional initial point.
+     * @param \Ballen\Distical\LatLong $pointB Optional final point.
      */
-    public function __construct($point_a = null, $point_b = null)
+    public function __construct($pointA = null, $pointB = null)
     {
-        if (($point_a instanceof LatLong) && ($point_b instanceof LatLong)) {
-            $this->between($point_a, $point_b);
+        if (($pointA instanceof LatLong) && ($pointB instanceof LatLong)) {
+            $this->between($pointA, $pointB);
         }
     }
 
@@ -51,11 +51,11 @@ class Calculator
      */
     public function addPoint(LatLong $point, $key = null)
     {
-        if (!is_null($key)) {
-            $this->points[$key] = $point;
-        } else {
+        if (is_null($key)) {
             $this->points[] = $point;
+            return $this;
         }
+        $this->points[$key] = $point;
         return $this;
     }
 
@@ -69,51 +69,50 @@ class Calculator
     {
         if (isset($this->points[$key])) {
             unset($this->points[$key]);
-        } else {
-            throw new \InvalidArgumentException('The point key does not exist.');
+            return $this;
         }
-        return $this;
+        throw new \InvalidArgumentException('The point key does not exist.');
     }
 
     /**
      * Helper method to get distance between two points.
-     * @param LatLong $point_a Point A (eg. Departure point)
-     * @param LatLong $point_b Point B (eg. Arrival point)
+     * @param LatLong $pointA Point A (eg. Departure point)
+     * @param LatLong $pointB Point B (eg. Arrival point)
      * @return \Ballen\Distical\Calculator
      * @throws \RuntimeException
      */
-    public function between(LatLong $point_a, LatLong $point_b)
+    public function between(LatLong $pointA, LatLong $pointB)
     {
         if (!empty($this->points)) {
             throw new \RuntimeException('The between() method can only be called when it is the first set or co-ordinates.');
         }
-        $this->addPoint($point_a);
-        $this->addPoint($point_b);
+        $this->addPoint($pointA);
+        $this->addPoint($pointB);
         return $this;
     }
 
     /**
      * Calculates the distance between two lat/lng posistions.
-     * @param LatLong $point_a Point A (eg. Departure point)
-     * @param LatLong $point_b Point B (eg. Arrival point)
+     * @param LatLong $pointA Point A (eg. Departure point)
+     * @param LatLong $pointB Point B (eg. Arrival point)
      * @return double
      */
-    private function distanceBetweenPoints(LatLong $point_a, LatLong $point_b)
+    private function distanceBetweenPoints(LatLong $pointA, LatLong $pointB)
     {
         $pi180 = M_PI / 180;
-        $lat_a = $point_a->lat() * $pi180;
-        $lng_a = $point_a->lng() * $pi180;
-        $lat_b = $point_b->lat() * $pi180;
-        $lng_b = $point_b->lng() * $pi180;
-        $dlat = $lat_b - $lat_a;
-        $dlng = $lng_b - $lng_a;
-        $a = sin($dlat / 2) * sin($dlat / 2) + cos($lat_a) * cos($lat_b) * sin($dlng / 2) * sin($dlng / 2);
-        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-        return self::MEAN_EARTH_RADIUS * $c;
+        $latA = $pointA->lat() * $pi180;
+        $lngA = $pointA->lng() * $pi180;
+        $latB = $pointB->lat() * $pi180;
+        $lngB = $pointB->lng() * $pi180;
+        $dlat = $latB - $latA;
+        $dlng = $lngB - $lngA;
+        $calcA = sin($dlat / 2) * sin($dlat / 2) + cos($latA) * cos($latB) * sin($dlng / 2) * sin($dlng / 2);
+        $calcB = 2 * atan2(sqrt($calcA), sqrt(1 - $calcA));
+        return self::MEAN_EARTH_RADIUS * $calcB;
     }
 
     /**
-     * Calculates the disatance between each of the points.
+     * Calculates the distance between each of the points.
      * @return double Distance in kilometres.
      */
     private function calculate()

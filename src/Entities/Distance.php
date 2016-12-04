@@ -1,4 +1,5 @@
-<?php namespace Ballen\Distical\Entities;
+<?php
+namespace Ballen\Distical\Entities;
 
 /**
  * Distical
@@ -8,10 +9,9 @@
  * co-ordinates.
  *
  * @author Bobby Allen <ballen@bobbyallen.me>
- * @version 2.0.0
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/bobsta63/distical
- * @link http://www.bobbyallen.me
+ * @link https://github.com/allebb/distical
+ * @link http://bobbyallen.me
  *
  */
 class Distance
@@ -43,7 +43,7 @@ class Distance
     }
 
     /**
-     * Validates the distance constuctor value.
+     * Validates the distance constructor value.
      * @param mixed $distance 
      * @throws \InvalidArgumentException
      */
@@ -51,7 +51,8 @@ class Distance
     {
         if (!is_numeric($distance)) {
             throw new \InvalidArgumentException('The distance value must be of a valid type.');
-        } elseif (!$distance > 0) {
+        }
+        if (!$distance > 0) {
             throw new \InvalidArgumentException('The distance must be greater than zero!');
         }
     }

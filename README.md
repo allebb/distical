@@ -16,7 +16,7 @@ This client library is released under the [MIT license](LICENSE).
 
 This library is developed and tested for PHP 5.3+
 
-This library is unit tested against PHP 5.3, 5.4, 5.5, 5.6, HHVM and 7.0!
+This library is unit tested against PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1 and HHVM!
 
 ## Setup
 
@@ -70,7 +70,7 @@ A set of working examples can be found in the ``/examples`` directory, feel free
 
 This library is fully unit tested using [PHPUnit](https://phpunit.de/).
 
-I use TravisCI for continuous integration, which triggers tests for PHP 5.3, 5.4, 5.5, 5.6, 7.0 and HHVM everytime a commit is pushed.
+I use TravisCI for continuous integration, which triggers tests for PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1 and HHVM everytime a commit is pushed.
 
 If you wish to run the tests yourself you should run the following:
 

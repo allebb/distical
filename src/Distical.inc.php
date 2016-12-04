@@ -7,12 +7,12 @@
  * co-ordinates.
  *
  * @author Bobby Allen <ballen@bobbyallen.me>
- * @version 2.0.0
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/bobsta63/distical
- * @link http://www.bobbyallen.me
+ * @link https://github.com/allebb/distical
+ * @link http://bobbyallen.me
  *
  */
+
 /* * *****************************************************************************
  * THIS FILE SHOULD BE USED FOR AUTOMATICALLY LOADING THIS LIBRARY WHEN YOU ARE
  *  USING IT "STANDALONE" AND NOT USING COMPOSER OR ANOTHER PACKAGE MANAGER.
