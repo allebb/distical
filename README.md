@@ -16,7 +16,7 @@ This client library is released under the [MIT license](LICENSE).
 
 This library is developed and tested for PHP 5.3+
 
-This library is unit tested against PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1 and HHVM!
+This library is unit tested against PHP 5.6, 7.0, 7.1 , 7.2, 7.3 and 7.4!
 
 ## Setup
 
@@ -24,7 +24,13 @@ I highly recommend the use of [Composer](https://getcomposer.org/) when installi
 
 ### Composer
 
-To add this library to your project, edit your ``composer.json`` file and add the following lines (or update your existing ``require`` section with the library like so):
+Simply require this package as follows:
+
+```shell
+composer require ballen/distical
+```
+
+Alternatively, you can add this library to your project, edit your ``composer.json`` file and add the following lines (or update your existing ``require`` section with the library like so):
 
 ```php
 "require": {
@@ -35,7 +41,7 @@ To add this library to your project, edit your ``composer.json`` file and add th
 Then install the package like so:
 
 ```
-composer install ballen/distical --no-dev
+composer install
 ```
 
 ### Standalone
@@ -70,7 +76,7 @@ A set of working examples can be found in the ``/examples`` directory, feel free
 
 This library is fully unit tested using [PHPUnit](https://phpunit.de/).
 
-I use TravisCI for continuous integration, which triggers tests for PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1 and HHVM everytime a commit is pushed.
+I use TravisCI for continuous integration, which triggers tests for PHP 5.6, 7.0, 7.1 , 7.2, 7.3 and 7.4 everytime a commit is pushed.
 
 If you wish to run the tests yourself you should run the following:
 
