@@ -27,14 +27,14 @@ class Calculator
 
     /**
      * LatLon points to measure between.
-     * @var array
+     * @var Entities\LatLong[]
      */
     private $points;
 
     /**
      * The constructor
-     * @param \Ballen\Distical\LatLong $pointA Optional initial point.
-     * @param \Ballen\Distical\LatLong $pointB Optional final point.
+     * @param Entities\LatLong $pointA Optional initial point.
+     * @param Entities\LatLong $pointB Optional final point.
      */
     public function __construct($pointA = null, $pointB = null)
     {
@@ -62,7 +62,7 @@ class Calculator
     /**
      * Remove a lat/long co-ordinate from the points collection.
      * @param int|string $key The name or ID of the point key.
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return \Ballen\Distical\Calculator
      */
     public function removePoint($key = null)
