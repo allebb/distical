@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 /**
  * Distical
  *
@@ -15,9 +17,9 @@
  */
 use \Ballen\Distical\Entities\Distance;
 
-class DistanceEntityTest extends PHPUnit_Framework_TestCase
+class DistanceEntityTest extends \PHPUnit_Framework_TestCase
 {
-
+    /** @var Distance */
     protected $entity;
 
     public function __construct()
@@ -27,7 +29,7 @@ class DistanceEntityTest extends PHPUnit_Framework_TestCase
 
     public function testEntityCreation()
     {
-        $this->assertInstanceOf('Ballen\Distical\Entities\Distance', $this->entity);
+        $this->assertInstanceOf(Distance::class, $this->entity);
     }
 
     public function testInvalidEntityCreationWithAsString()

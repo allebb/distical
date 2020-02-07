@@ -29,12 +29,13 @@ class Distance
 
     /**
      * The distance in kilometres
+     * @var double|int
      */
     private $kilometres;
 
     /**
      * Class constructor
-     * @param double $kilometres The distance in kilometres.
+     * @param mixed $kilometres The distance in kilometres.
      */
     public function __construct($kilometres = 0)
     {
@@ -44,8 +45,9 @@ class Distance
 
     /**
      * Validates the distance constructor value.
-     * @param mixed $distance 
+     * @param mixed $distance
      * @throws \InvalidArgumentException
+     * @return void
      */
     private function validateDistance($distance)
     {

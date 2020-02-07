@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 /**
  * Distical
  *
@@ -15,11 +17,15 @@
  */
 use \Ballen\Distical\Entities\LatLong;
 
-class LatLongEntityTest extends PHPUnit_Framework_TestCase
+class LatLongEntityTest extends \PHPUnit_Framework_TestCase
 {
-
+    /** @var LatLong */
     protected $entity;
+
+    /** @var float */
     protected $test_lat = 52.005497;
+
+    /** @var float */
     protected $test_lng = 1.045748;
 
     public function __construct()
@@ -54,25 +60,25 @@ class LatLongEntityTest extends PHPUnit_Framework_TestCase
 
     public function testInvalidLatCoordValidation()
     {
-        $this->setExpectedException('\Ballen\Distical\Exceptions\InvalidLatitudeFormatException', 'The latitude parameter is invalid, value must be between -90 and 90');
+        $this->setExpectedException(\Ballen\Distical\Exceptions\InvalidLatitudeFormatException::class, 'The latitude parameter is invalid, value must be between -90 and 90');
         $test = new LatLong(-91, $this->test_lng);
     }
 
     public function testInvalidLonCoordValidation()
     {
-        $this->setExpectedException('Ballen\Distical\Exceptions\InvalidLongitudeFormatException', 'The longitude parameter is invalid, value must be between -180 and 180');
+        $this->setExpectedException(\Ballen\Distical\Exceptions\InvalidLongitudeFormatException::class, 'The longitude parameter is invalid, value must be between -180 and 180');
         $test = new LatLong($this->test_lat, 181);
     }
 
     public function testInvalidCoords()
     {
-        $this->setExpectedException('Ballen\Distical\Exceptions\InvalidLatitudeFormatException', 'The latitude parameter is invalid, value must be between -90 and 90');
+        $this->setExpectedException(\Ballen\Distical\Exceptions\InvalidLatitudeFormatException::class, 'The latitude parameter is invalid, value must be between -90 and 90');
         $test = new LatLong(-91, 251);
     }
 
     public function testValidCoords()
     {
         $test = new LatLong($this->test_lat, $this->test_lng);
-        $this->assertInstanceOf('\Ballen\Distical\Entities\LatLong', $test);
+        $this->assertInstanceOf(\Ballen\Distical\Entities\LatLong::class, $test);
     }
 }

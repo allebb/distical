@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 /**
  * Distical
  *
@@ -16,12 +18,18 @@
 use \Ballen\Distical\Calculator;
 use \Ballen\Distical\Entities\LatLong;
 
-class DisticalTest extends PHPUnit_Framework_TestCase
+class DisticalTest extends \PHPUnit_Framework_TestCase
 {
-
+    /** @var LatLong */
     protected $latlong1;
+
+    /** @var LatLong */
     protected $latlong2;
+
+    /** @var LatLong */
     protected $latlong3;
+
+    /** @var LatLong */
     protected $latlong4;
 
     public function __construct()
