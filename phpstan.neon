@@ -1,6 +1,0 @@
-parameters:
-  level: max
-  ignoreErrors:
-    -
-        message: '#Method .* has no return typehint specified#'
-        path: tests/*

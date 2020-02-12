@@ -18,16 +18,32 @@ use Ballen\Distical\Calculator;
 use Ballen\Distical\Entities\LatLong;
 
 // Define some co-ordinates...
-$central_ipswich = new LatLong(51.73441738801072, 0.4632282257080078); // Central Ipswich co-ordinates!
-$central_aylesbury = new LatLong(51.81259469696908, -0.8111858367919922); // Central Aylesbury co-ordinates!
-$central_colchester = new LatLong(51.888359, 0.892639); // Central Colchester co-ordinates!
+$centralIpswich = new LatLong(51.73441738801072, 0.4632282257080078); // Central Ipswich co-ordinates!
+$centralAylesbury = new LatLong(51.81259469696908, -0.8111858367919922); // Central Aylesbury co-ordinates!
+$centralColchester = new LatLong(51.888359, 0.892639); // Central Colchester co-ordinates!
 
 echo '<h1>Distical examples</h1>';
-echo '<h2>Object instansiation with constructor co-ordinates:</h2>';
-$point_to_point = new Calculator($central_ipswich, $central_aylesbury); // Create a new instance of the class.
-echo '<p>Total distance between Ipswich and Aylesbury is ' . $point_to_point->get() . 'km (or ' . $point_to_point->get()->asMiles() . ').</p>';
+
+echo '<h2>Object instantiation with constructor coordinates:</h2>';
+
+// Create a new instance of the class passing in two coordinates (LatLong objects)
+$pointToPointCalculator = new Calculator($centralIpswich, $centralAylesbury);
+
+// Calculate the distance and return in both kilometre and miles...
+$km = $pointToPointCalculator->get()->asKilometres();
+$miles = $pointToPointCalculator->get()->asMiles();
+
+// Output the distance calculation in summary:
+echo "<p>Total distance between Ipswich and Aylesbury is  {$km}km (or {$miles} miles).</p>";
+
 
 echo '<h2>Getting distance conversion for multiple points:</h2>';
-$multi_point_distance = new Calculator;
-$distance = $multi_point_distance->between($central_colchester, $central_ipswich)->addPoint($central_aylesbury)->get();
-echo 'Distance from Colchester to Ipswich and then streight on to Aylesbury is: ' . $distance->asKilometres() . 'km (or ' . $distance->asMiles() . ' miles).<br /><br />';
+// Create an instance of the Calculator
+$multiPointCalculator = new Calculator;
+
+$distance = $multiPointCalculator->between($centralColchester, $centralIpswich) // Add our initial two coordinates...
+    ->addPoint($centralAylesbury) // We can now chain on a third (forth, fifth etc).
+    ->get(); // Calculate the whole distance once only (chaining would calculate multiple times!)
+
+// Output the distance in summary:
+echo "<p>Distance from Colchester to Ipswich and then straight on to Aylesbury is:  " . $distance->asKilometres(). "km (or " . $distance->asMiles() . " miles).</p>";
