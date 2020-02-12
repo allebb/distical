@@ -64,7 +64,8 @@ $ipswich = new LatLong(52.057941, 1.147172);
 $london = new LatLong(51.507608, -0.127822);
 
 // Get the distance between these two Lat/Long coordinates...
-$distance = new DistanceCalculator($ipswich, $london);
+$distanceCalculator = new DistanceCalculator($ipswich, $london);
+$distance = $calculator->get();
 
 // Get the distance as Miles (asMiles()), you could also use asKilometres() or asNauticalMiles() distance conversions too!
 echo 'Distance in miles between Central Ipswich and Central London is: ' . $distance->asMiles();
