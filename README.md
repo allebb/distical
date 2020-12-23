@@ -1,7 +1,7 @@
 # Distical
 
-[![Build Status](https://travis-ci.org/allebb/distical.svg)](https://travis-ci.org/allebb/distical)
-[![Code Coverage](https://scrutinizer-ci.com/g/allebb/distical/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/allebb/distical/?branch=master)
+[![Build](https://github.com/allebb/distical/workflows/build/badge.svg)](https://github.com/allebb/distical/actions)
+[![Code Coverage](https://codecov.io/gh/allebb/distical/branch/master/graph/badge.svg)](https://codecov.io/gh/allebb/distical)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/allebb/distical/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/allebb/distical/?branch=master)
 [![Code Climate](https://codeclimate.com/github/allebb/distical/badges/gpa.svg)](https://codeclimate.com/github/allebb/distical)
 [![Latest Stable Version](https://poser.pugx.org/ballen/distical/v/stable)](https://packagist.org/packages/ballen/distical) [![Latest Unstable Version](https://poser.pugx.org/ballen/distical/v/unstable)](https://packagist.org/packages/ballen/distical) [![License](https://poser.pugx.org/ballen/distical/license)](https://packagist.org/packages/ballen/distical)
