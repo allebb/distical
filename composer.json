@@ -4,7 +4,7 @@
     "type": "library",
     "keywords": ["latitude", "longditude", "lat", "lng", "long", "calculator", "gps", "mapping", "distance"],
     "license": "MIT",
-    "homepage": "http://github.com/bobsta63/distical",
+    "homepage": "http://github.com/allebb/distical",
     "authors": [
         {
             "name": "ballen",
