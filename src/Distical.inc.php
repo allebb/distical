@@ -10,7 +10,6 @@
  * @license http://opensource.org/licenses/MIT
  * @link https://github.com/allebb/distical
  * @link http://bobbyallen.me
- * @codeCoverageIgnore
  *
  */
 /* * *****************************************************************************
@@ -18,6 +17,7 @@
  *  USING IT "STANDALONE" AND NOT USING COMPOSER OR ANOTHER PACKAGE MANAGER.
  */
 
+// @codeCoverageIgnoreStart
 $includes = array(
     'Calculator.php',
     'Entities/LatLong.php',
@@ -29,3 +29,4 @@ $includes = array(
 foreach ($includes as $file) {
     require_once dirname(__FILE__) . '/' . $file;
 }
+// @codeCoverageIgnoreEnd
