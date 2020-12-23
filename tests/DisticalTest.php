@@ -15,10 +15,13 @@ namespace Tests;
  * @link http://bobbyallen.me
  *
  */
-use \Ballen\Distical\Calculator;
-use \Ballen\Distical\Entities\LatLong;
 
-class DisticalTest extends \PHPUnit_Framework_TestCase
+use \Ballen\Distical\Calculator;
+use Ballen\Distical\Entities\Distance;
+use \Ballen\Distical\Entities\LatLong;
+use PHPUnit\Framework\TestCase;
+
+class DisticalTest extends TestCase
 {
     /** @var LatLong */
     protected $latlong1;
@@ -32,7 +35,7 @@ class DisticalTest extends \PHPUnit_Framework_TestCase
     /** @var LatLong */
     protected $latlong4;
 
-    public function __construct()
+    public function setUp(): void
     {
         $this->latlong1 = new LatLong(52.005497, 1.045748);
         $this->latlong2 = new LatLong(52.052728, 1.160446);
@@ -41,7 +44,10 @@ class DisticalTest extends \PHPUnit_Framework_TestCase
 
     public function testCalculationWithSinglePoint()
     {
-        $this->setExpectedException('RuntimeException', 'There must be two or more points (co-ordinates) before a calculation can be performed.');
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage(
+            'There must be two or more points (co-ordinates) before a calculation can be performed.'
+        );
         $calculator = new Calculator();
         $calculator->addPoint($this->latlong1)->get();
     }
@@ -50,18 +56,31 @@ class DisticalTest extends \PHPUnit_Framework_TestCase
     {
         $calculator = new Calculator();
         $calculator->addPoint($this->latlong1, 'CapelStMary');
+
+        $this->expectExceptionMessage(
+            'There must be two or more points (co-ordinates) before a calculation can be performed.'
+        );
+        $calculator->get();
     }
 
     public function testRemovePointWithKey()
     {
         $calculator = new Calculator();
         $calculator->addPoint($this->latlong1, 'ToBeRemovedAfter');
+        $calculator->addPoint($this->latlong2, 'CapelStMary');
+        $this->assertInstanceOf(Distance::class, $calculator->get());
+
         $calculator->removePoint('ToBeRemovedAfter');
+        $this->expectExceptionMessage(
+            'There must be two or more points (co-ordinates) before a calculation can be performed.'
+        );
+        $calculator->get();
     }
 
     public function testRemovePointWithInvalidKey()
     {
-        $this->setExpectedException('InvalidArgumentException', 'The point key does not exist.');
+        $this->expectExceptionMessage('The point key does not exist.');
+        $this->expectException('InvalidArgumentException');
         $calculator = new Calculator();
         $calculator->addPoint($this->latlong1, 'ThisIsTheFirstAndOnlyNamedKey');
         $calculator->removePoint('TheSecondNamedKey');
@@ -165,7 +184,10 @@ class DisticalTest extends \PHPUnit_Framework_TestCase
 
     public function testPointBeforeBetween()
     {
-        $this->setExpectedException('RuntimeException', 'The between() method can only be called when it is the first set or co-ordinates.');
+        $this->expectException(
+            'RuntimeException',
+            'The between() method can only be called when it is the first set or co-ordinates.'
+        );
         $calculator = new Calculator;
         $calculator->addPoint($this->latlong3)->between($this->latlong1, $this->latlong2)->get();
     }

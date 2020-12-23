@@ -1,0 +1,52 @@
+name: build
+
+on: [ push, pull_request ]
+
+jobs:
+  build-test:
+    name: Executioner (PHP ${{ matrix.php-versions }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: [ '7.3', '7.4', '8.0' ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: xdebug
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Install Composer dependencies
+        run: composer install  --no-suggest --no-progress --prefer-dist --optimize-autoloader
+
+      - name: PHPUnit Tests
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+
+      - name: Upload code coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
+          flags: tests
+          name: codedev-umbrella
+          yml: ./codedev.yml
+          fail_ci_if_error: true
+
+      # For code coverage report we are uploading our code coverage report to scrutinizer
+      - name: Downloading scrutinizer ocular.phar
+        run: wget https://scrutinizer-ci.com/ocular.phar
+
+      # Uploading reports for analysis
+      - name: Uploading code coverage to scrutinize
+        continue-on-error: true
+        run: php ocular.phar code-coverage:upload --format=php-clover coverage.xml

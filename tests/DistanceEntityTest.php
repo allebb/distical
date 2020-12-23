@@ -15,14 +15,16 @@ namespace Tests;
  * @link http://bobbyallen.me
  *
  */
-use \Ballen\Distical\Entities\Distance;
 
-class DistanceEntityTest extends \PHPUnit_Framework_TestCase
+use \Ballen\Distical\Entities\Distance;
+use PHPUnit\Framework\TestCase;
+
+class DistanceEntityTest extends TestCase
 {
     /** @var Distance */
     protected $entity;
 
-    public function __construct()
+    public function setUp(): void
     {
         $this->entity = new Distance(100);
     }
@@ -34,13 +36,13 @@ class DistanceEntityTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidEntityCreationWithAsString()
     {
-        $this->setExpectedException('InvalidArgumentException', 'The distance value must be of a valid type.');
+        $this->expectException('InvalidArgumentException', 'The distance value must be of a valid type.');
         $test = new Distance('a random string');
     }
 
     public function testInvalidEntityCreationWithZero()
     {
-        $this->setExpectedException('InvalidArgumentException', 'The distance must be greater than zero!');
+        $this->expectException('InvalidArgumentException', 'The distance must be greater than zero!');
         $test = new Distance(0);
     }
 

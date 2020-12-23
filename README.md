@@ -14,9 +14,9 @@ This client library is released under the [MIT license](LICENSE).
 
 ## Requirements
 
-This library is developed and tested for PHP 5.3+
+This library is unit tested against PHP 7.3, 7.4 and 8.0!
 
-This library is unit tested against PHP 5.6, 7.0, 7.1 , 7.2, 7.3 and 7.4!
+If you need to use an older version of PHP, you should instead install the 3.x version of this library (see below for details).
 
 ## Setup
 
@@ -30,15 +30,11 @@ Simply require this package as follows:
 composer require ballen/distical
 ```
 
-Alternatively, you can add this library to your project, edit your ``composer.json`` file and add the following lines (or update your existing ``require`` section with the library like so):
+**If you need to use an older version of PHP, version 2.x.x supports PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1 and 7.2, you can install this version using Composer with this command instead:**
 
-```php
-"require": {
-        "ballen/distical": "~2.0"
-}
+```shell
+composer require ballen/disitcal ^2.0
 ```
-
-Then install the package like so:
 
 ```
 composer install
@@ -80,7 +76,7 @@ A set of working examples including multi-point calculations can be found in the
 
 This library is fully unit tested using [PHPUnit](https://phpunit.de/).
 
-I use TravisCI for continuous integration, which triggers tests for PHP 5.6, 7.0, 7.1 , 7.2, 7.3 and 7.4 everytime a commit is pushed.
+I use GitHub Actions for continuous integration, which triggers tests for PHP 7.3, 7.4 and 8.0 everytime a commit is pushed.
 
 If you wish to run the tests yourself you should run the following:
 

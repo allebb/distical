@@ -15,9 +15,11 @@ namespace Tests;
  * @link http://bobbyallen.me
  *
  */
-use \Ballen\Distical\Entities\LatLong;
 
-class LatLongEntityTest extends \PHPUnit_Framework_TestCase
+use \Ballen\Distical\Entities\LatLong;
+use PHPUnit\Framework\TestCase;
+
+class LatLongEntityTest extends TestCase
 {
     /** @var LatLong */
     protected $entity;
@@ -28,7 +30,7 @@ class LatLongEntityTest extends \PHPUnit_Framework_TestCase
     /** @var float */
     protected $test_lng = 1.045748;
 
-    public function __construct()
+    public function setUp(): void
     {
         $this->entity = new LatLong($this->test_lat, $this->test_lng);
     }
@@ -60,19 +62,28 @@ class LatLongEntityTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidLatCoordValidation()
     {
-        $this->setExpectedException(\Ballen\Distical\Exceptions\InvalidLatitudeFormatException::class, 'The latitude parameter is invalid, value must be between -90 and 90');
+        $this->expectException(
+            \Ballen\Distical\Exceptions\InvalidLatitudeFormatException::class,
+            'The latitude parameter is invalid, value must be between -90 and 90'
+        );
         $test = new LatLong(-91, $this->test_lng);
     }
 
     public function testInvalidLonCoordValidation()
     {
-        $this->setExpectedException(\Ballen\Distical\Exceptions\InvalidLongitudeFormatException::class, 'The longitude parameter is invalid, value must be between -180 and 180');
+        $this->expectException(
+            \Ballen\Distical\Exceptions\InvalidLongitudeFormatException::class,
+            'The longitude parameter is invalid, value must be between -180 and 180'
+        );
         $test = new LatLong($this->test_lat, 181);
     }
 
     public function testInvalidCoords()
     {
-        $this->setExpectedException(\Ballen\Distical\Exceptions\InvalidLatitudeFormatException::class, 'The latitude parameter is invalid, value must be between -90 and 90');
+        $this->expectException(
+            \Ballen\Distical\Exceptions\InvalidLatitudeFormatException::class,
+            'The latitude parameter is invalid, value must be between -90 and 90'
+        );
         $test = new LatLong(-91, 251);
     }
 
