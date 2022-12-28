@@ -153,7 +153,7 @@ class DisticalTest extends TestCase
     {
         $calculator = new Calculator;
         $calculator->between($this->latlong1, $this->latlong2)->addPoint($this->latlong3);
-        $this->assertEquals(8.487404292832236, $calculator->get()->asNauticalMiles());
+        $this->assertEquals(8.487404292832238, $calculator->get()->asNauticalMiles());
     }
 
     public function testPointToPointToString()
