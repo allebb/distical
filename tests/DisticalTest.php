@@ -91,13 +91,13 @@ class DisticalTest extends TestCase
     public function testBetweenUsingConstructorToString()
     {
         $calculator = new Calculator($this->latlong1, $this->latlong2);
-        $this->assertEquals(9.44492471313132, $calculator->get()->asKilometres());
+        $this->assertEquals(9.444924713131321, $calculator->get()->asKilometres());
     }
 
     public function testBetweenUsingConstructorToMiles()
     {
         $calculator = new Calculator($this->latlong1, $this->latlong2);
-        $this->assertEquals(5.868804127348667, $calculator->get()->asMiles());
+        $this->assertEquals(5.8688041273486675, $calculator->get()->asMiles());
     }
 
     public function testBetweenToString()
@@ -111,21 +111,21 @@ class DisticalTest extends TestCase
     {
         $calculator = new Calculator;
         $calculator->between($this->latlong1, $this->latlong2);
-        $this->assertEquals(9.44492471313132, $calculator->get()->asKilometres());
+        $this->assertEquals(9.444924713131321, $calculator->get()->asKilometres());
     }
 
     public function testBetweenToMiles()
     {
         $calculator = new Calculator;
         $calculator->between($this->latlong1, $this->latlong2);
-        $this->assertEquals(5.868804127348667, $calculator->get()->asMiles());
+        $this->assertEquals(5.8688041273486675, $calculator->get()->asMiles());
     }
 
     public function testBetweenToNauticalMiles()
     {
         $calculator = new Calculator;
         $calculator->between($this->latlong1, $this->latlong2);
-        $this->assertEquals(5.09985135267808, $calculator->get()->asNauticalMiles());
+        $this->assertEquals(5.099851352678081, $calculator->get()->asNauticalMiles());
     }
 
     public function testBetweenWithAdditionalPointToString()
@@ -139,7 +139,7 @@ class DisticalTest extends TestCase
     {
         $calculator = new Calculator;
         $calculator->between($this->latlong1, $this->latlong2)->addPoint($this->latlong3);
-        $this->assertEquals(15.718672763591861, $calculator->get()->asKilometres());
+        $this->assertEquals(15.718672763591863, $calculator->get()->asKilometres());
     }
 
     public function testBetweenWithAdditionalPointToMiles()
@@ -167,21 +167,21 @@ class DisticalTest extends TestCase
     {
         $calculator = new Calculator;
         $calculator->addPoint($this->latlong1)->addPoint($this->latlong2);
-        $this->assertEquals(5.868804127348667, $calculator->get()->asMiles());
+        $this->assertEquals(5.8688041273486675, $calculator->get()->asMiles());
     }
 
     public function testPointToPointToKilometers()
     {
         $calculator = new Calculator;
         $calculator->addPoint($this->latlong1)->addPoint($this->latlong2);
-        $this->assertEquals(9.44492471313132, $calculator->get()->asKilometres());
+        $this->assertEquals(9.444924713131321, $calculator->get()->asKilometres());
     }
 
     public function testPointToPointToNauticalMiles()
     {
         $calculator = new Calculator;
         $calculator->addPoint($this->latlong1)->addPoint($this->latlong2);
-        $this->assertEquals(5.09985135267808, $calculator->get()->asNauticalMiles());
+        $this->assertEquals(5.099851352678081, $calculator->get()->asNauticalMiles());
     }
 
     public function testPointBeforeBetween()
