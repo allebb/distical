@@ -16,6 +16,8 @@ namespace Tests;
  *
  */
 
+ini_set('precision', 15); // Force float precision (to ensure tests run as expected on any environment)
+
 use \Ballen\Distical\Calculator;
 use Ballen\Distical\Entities\Distance;
 use \Ballen\Distical\Entities\LatLong;
@@ -37,7 +39,6 @@ class DisticalTest extends TestCase
 
     public function setUp(): void
     {
-        ini_set('precision', 15); // Force float precision (to ensure tests run as expected on any environment)
         $this->latlong1 = new LatLong(52.005497, 1.045748);
         $this->latlong2 = new LatLong(52.052728, 1.160446);
         $this->latlong3 = new LatLong(52.062515, 1.250790);
