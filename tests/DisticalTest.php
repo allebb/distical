@@ -37,6 +37,7 @@ class DisticalTest extends TestCase
 
     public function setUp(): void
     {
+        ini_set('precision', 15); // Force float precision (to ensure tests run as expected on any environment)
         $this->latlong1 = new LatLong(52.005497, 1.045748);
         $this->latlong2 = new LatLong(52.052728, 1.160446);
         $this->latlong3 = new LatLong(52.062515, 1.250790);
@@ -102,7 +103,7 @@ class DisticalTest extends TestCase
     {
         $calculator = new Calculator;
         $calculator->between($this->latlong1, $this->latlong2);
-        $this->assertEquals('9.4449247131313', $calculator->get()->__toString());
+        $this->assertEquals('9.44492471313132', $calculator->get()->__toString());
     }
 
     public function testBetweenToKilometers()
@@ -130,7 +131,7 @@ class DisticalTest extends TestCase
     {
         $calculator = new Calculator;
         $calculator->between($this->latlong1, $this->latlong2)->addPoint($this->latlong3);
-        $this->assertEquals('15.718672763592', $calculator->get()->__toString());
+        $this->assertEquals('15.7186727635919', $calculator->get()->__toString());
     }
 
     public function testBetweenWithAdditionalPointToKilometers()
@@ -158,7 +159,7 @@ class DisticalTest extends TestCase
     {
         $calculator = new Calculator;
         $calculator->addPoint($this->latlong1)->addPoint($this->latlong2);
-        $this->assertEquals('9.4449247131313', $calculator->get()->__toString());
+        $this->assertEquals('9.44492471313132', $calculator->get()->__toString());
     }
 
     public function testPointToPointToMiles()
