@@ -46,3 +46,31 @@ $distance = $multiPointCalculator->between($centralColchester, $centralIpswich) 
 
 // Output the distance in summary:
 echo "<p>Distance from Colchester to Ipswich and then straight on to Aylesbury is:  " . $distance->asKilometres(). "km (or " . $distance->asMiles() . " miles).</p>";
+
+// Reset the points and add new ones...
+$calculator = new Calculator();
+$calculator->addPoint($centralIpswich);
+$calculator->addPoint($centralAylesbury);
+$calculator->resetPoints();
+$calculator->addPoint($centralAylesbury);
+$calculator->addPoint($centralColchester);
+
+$distance = $calculator->get();
+
+// Output the distance in summary:
+echo "<p>Distance from Aylesbury to Colchester is:  " . $distance->asKilometres(). "km (or " . $distance->asMiles() . " miles).</p>";
+
+// Reset the points with calculations and calculate new ones...
+$calculator = new Calculator();
+$calculator->addPoint($centralIpswich);
+$calculator->addPoint($centralAylesbury);
+$distance1 = $calculator->get(true);
+
+$calculator->addPoint($centralAylesbury);
+$calculator->addPoint($centralColchester);
+
+$distance2 = $calculator->get(true);
+
+// Output the distance in summary:
+echo "<p>Distance from Ipswich to Aylesbury is:  " . $distance1->asKilometres(). "km (or " . $distance1->asMiles() . " miles).</p>";
+echo "<p>Distance from Aylesbury to Colchester is:  " . $distance2->asKilometres(). "km (or " . $distance2->asMiles() . " miles).</p>";
