@@ -42,8 +42,8 @@ class DistanceEntityTest extends TestCase
 
     public function testInvalidEntityCreationWithZero()
     {
-        $this->expectException('InvalidArgumentException', 'The distance must be greater than zero!');
-        $test = new Distance(0);
+        $this->expectException('InvalidArgumentException', 'The distance must be greater than or equals zero!');
+        $test = new Distance(-1);
     }
 
     public function testConversionToKilometres()

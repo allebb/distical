@@ -54,8 +54,8 @@ class Distance
         if (!is_numeric($distance)) {
             throw new \InvalidArgumentException('The distance value must be of a valid type.');
         }
-        if (!$distance > 0) {
-            throw new \InvalidArgumentException('The distance must be greater than zero!');
+        if ($distance < 0) {
+            throw new \InvalidArgumentException('The distance must be greater than or equals zero!');
         }
     }
 
