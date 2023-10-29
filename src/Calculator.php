@@ -78,7 +78,7 @@ class Calculator
      * Resets the points collection.
      * @return \Ballen\Distical\Calculator
      */
-    public function resetPoints($key = null)
+    public function resetPoints()
     {
         $this->points = [];
         return $this;        
