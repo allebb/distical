@@ -139,7 +139,7 @@ class Calculator
             $previous = $point;
         }
 
-        if($shouldResetPoints === true) {
+        if ($shouldResetPoints === true) {
             $this->resetPoints();
         }
         
