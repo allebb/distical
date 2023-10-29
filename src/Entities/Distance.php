@@ -37,9 +37,9 @@ class Distance
      * Class constructor
      * @param mixed $kilometres The distance in kilometres.
      */
-    public function __construct($kilometres = 0)
+    public function __construct($kilometres = 0, $allowZero = false)
     {
-        $this->validateDistance($kilometres);
+        $this->validateDistance($kilometres, $allowZero);
         $this->kilometres = $kilometres;
     }
 
@@ -49,11 +49,16 @@ class Distance
      * @throws \InvalidArgumentException
      * @return void
      */
-    private function validateDistance($distance)
+    private function validateDistance($distance, $allowZero = false)
     {
         if (!is_numeric($distance)) {
             throw new \InvalidArgumentException('The distance value must be of a valid type.');
         }
+
+        if (!$allowZero && $distance === 0) {
+            throw new \InvalidArgumentException('The distance must be greater than zero!');
+        }
+
         if ($distance < 0) {
             throw new \InvalidArgumentException('The distance must be greater than or equals zero!');
         }
