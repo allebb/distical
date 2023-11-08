@@ -79,6 +79,51 @@ class DisticalTest extends TestCase
         $calculator->get();
     }
 
+    public function testResetPoints()
+    {
+        $calculator = new Calculator();
+        $calculator->addPoint($this->latlong1);
+        $calculator->addPoint($this->latlong2);
+        $this->assertInstanceOf(Distance::class, $calculator->get());
+
+        $calculator->resetPoints();
+        $calculator->addPoint($this->latlong3);
+        $this->expectExceptionMessage(
+            'There must be two or more points (co-ordinates) before a calculation can be performed.'
+        );
+        $calculator->get();
+
+        $calculator->addPoint($this->latlong2);
+        $this->assertEquals(6.273748050460542, $calculator->get()->asKilometres());
+    }
+
+    public function testCalculationsAfterResetPoints()
+    {
+        $calculator = new Calculator();
+        $calculator->addPoint($this->latlong1);
+        $calculator->addPoint($this->latlong2);
+        $calculator->resetPoints();
+        $calculator->addPoint($this->latlong2);
+        $calculator->addPoint($this->latlong3);
+
+        $this->assertEquals(6.273748050460542, $calculator->get()->asKilometres());
+        $this->assertNotEquals(9.444924713131321, $calculator->get()->asKilometres());
+    }
+
+    public function testResetPointsAfterCalculation()
+    {
+        $calculator = new Calculator();
+        $calculator->addPoint($this->latlong1);
+        $calculator->addPoint($this->latlong2);
+        $this->assertInstanceOf(Distance::class, $calculator->get(true));
+
+        $calculator->addPoint($this->latlong3);
+        $this->expectExceptionMessage(
+            'There must be two or more points (co-ordinates) before a calculation can be performed.'
+        );
+        $calculator->get();
+    }
+
     public function testRemovePointWithInvalidKey()
     {
         $this->expectExceptionMessage('The point key does not exist.');

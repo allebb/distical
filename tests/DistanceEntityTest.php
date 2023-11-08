@@ -36,14 +36,27 @@ class DistanceEntityTest extends TestCase
 
     public function testInvalidEntityCreationWithAsString()
     {
-        $this->expectException('InvalidArgumentException', 'The distance value must be of a valid type.');
-        $test = new Distance('a random string');
+        $this->expectExceptionMessage('The distance value must be of a valid type.');
+        new Distance('a random string');
     }
 
     public function testInvalidEntityCreationWithZero()
     {
-        $this->expectException('InvalidArgumentException', 'The distance must be greater than zero!');
-        $test = new Distance(0);
+        $this->expectExceptionMessage('The distance must be greater than zero!');
+        new Distance(0);
+    }
+
+    public function testInvalidEntityCreationWithNegative()
+    {
+        $this->expectExceptionMessage('The distance must be greater than or equals zero!');
+        new Distance(-1, true);
+    }
+
+    public function testEntityCreationWithAllowedZero()
+    {
+        $test = new Distance(0, true);
+        $this->assertInstanceOf(Distance::class, $test);
+        $this->assertEquals(0, $test->asKilometres());
     }
 
     public function testConversionToKilometres()

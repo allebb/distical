@@ -75,6 +75,16 @@ class Calculator
     }
 
     /**
+     * Resets the points collection.
+     * @return \Ballen\Distical\Calculator
+     */
+    public function resetPoints()
+    {
+        $this->points = [];
+        return $this;        
+    }
+
+    /**
      * Helper method to get distance between two points.
      * @param LatLong $pointA Point A (eg. Departure point)
      * @param LatLong $pointB Point B (eg. Arrival point)
@@ -113,9 +123,10 @@ class Calculator
 
     /**
      * Calculates the distance between each of the points.
+     * @param bool $shouldResetPoints Clears points collection after calculating distance if true
      * @return double Distance in kilometres.
      */
-    private function calculate()
+    private function calculate(bool $shouldResetPoints = false)
     {
         if (count($this->points) < 2) {
             throw new \RuntimeException('There must be two or more points (co-ordinates) before a calculation can be performed.');
@@ -127,15 +138,21 @@ class Calculator
             }
             $previous = $point;
         }
+
+        if ($shouldResetPoints === true) {
+            $this->resetPoints();
+        }
+        
         return $total;
     }
 
     /**
      * Returns the total distance between the two lat/lng points.
+     * @param bool $shouldResetPoints Resets points collection after calculating distance if true
      * @return Distance
      */
-    public function get()
+    public function get(bool $shouldResetPoints = false)
     {
-        return new Distance($this->calculate());
+        return new Distance($this->calculate($shouldResetPoints));
     }
 }
